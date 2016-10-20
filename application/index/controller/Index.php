@@ -105,7 +105,7 @@ class Index extends \think\Controller
     	if (!empty($id)) {
     		$db = Db::name('info');
 	    	foreach ($id as $value) {
-	    		$db->where(['id' => $value, 'status' => 1])->update(['status' => 1, 'release_time' => time()]);
+	    		$db->where(['id' => $value, 'status' => 0])->update(['status' => 1, 'release_time' => time()]);
 	    	}
     		return ['status' => 1, 'info' => '发布成功'];
     	}
