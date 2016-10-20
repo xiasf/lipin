@@ -9,7 +9,7 @@ class Base extends \think\Controller
     public function _initialize()
     {
         if (!is_login()) {
-			$this->redirect('User/login');
+			$this->error('请先登录哦！', 'User/login');
         }
     }
 }
