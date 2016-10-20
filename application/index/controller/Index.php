@@ -57,9 +57,10 @@ class Index extends \think\Controller
     	$id = $request->param('id/d');
 
     	if ($request->isPost()) {
-    		$data = [];
-    		$data['name'] = $request->post('name');
-			$data['content'] = $request->post('content');
+			$data                = [];
+			$data['name']        = $request->post('name');
+			$data['content']     = $request->post('content');
+			$data['update_time'] = time();
 
 			// 获取表单上传文件
 	        $file = $request->file('pic');
@@ -98,8 +99,15 @@ class Index extends \think\Controller
         return $this->fetch('product-list');
     }
 
-    public function productSend()
+    public function productSend(Request $request)
     {
     	$id = $request->post('id/a');
+    	if (!empty($id)) {
+    		$db = Db::name('info');
+	    	foreach ($id as $value) {
+	    		$db->where(['id' => $value, 'status' => 1])->update(['status' => 1, 'release_time' => time()]);
+	    	}
+    		return ['status' => 1, 'info' => '发布成功'];
+    	}
     }
 }
