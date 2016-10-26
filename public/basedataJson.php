@@ -8,7 +8,7 @@ $arr = [
 
 	['begin' => 1165814226,
 	'end' => 1165814226,
-	'content' => '好一朵菊花',
+	'content' => '视频的文字介绍',
 	'pic' => '',
 'video' => 'http://lipin.uogo8.com/uploads/20161023/a.mp4',
 	'author' => 'xixi1',
@@ -16,7 +16,7 @@ $arr = [
 
 	['begin' => 2835549379,
 	'end' => 2835549379,
-	'content' => '大勇哥',
+	'content' => '中国女排，再铸辉煌',
 	'pic' => 'http://lipin.uogo8.com/uploads/20161023/2.png',
 'video' => '',
 	'author' => 'xixi2',
@@ -24,7 +24,7 @@ $arr = [
 
 	['begin' => 1165812466,
 	'end' => 1165812466,
-	'content' => '陶哥的梦想',
+	'content' => '视频的文字介绍',
 	'pic' => '',
 'video' => 'http://lipin.uogo8.com/uploads/20161023/b.mp4',
 	'author' => 'xixi3',
@@ -32,7 +32,7 @@ $arr = [
 
 	['begin' => 1165810674,
 	'end' => 1165810674,
-	'content' => '浪里个浪',
+	'content' => '图片的文字介绍',
 	'pic' => 'http://lipin.uogo8.com/uploads/20161023/2.png',
 'video' => '',
 	'author' => 'xixi4',
