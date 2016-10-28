@@ -94,7 +94,7 @@ class Index extends Base
     {
     	// $list = UserModel::paginate(3);
 
-    	$list = Db::name('info')->order('id', 'desc')->paginate(3);
+    	$list = Db::name('info')->order('id', 'desc')->paginate(50);
     	$this->assign('list',$list);
         return $this->fetch('product-list');
     }
@@ -104,10 +104,25 @@ class Index extends Base
     	$id = $request->post('id/a');
     	if (!empty($id)) {
     		$db = Db::name('info');
+    		// 把先前所有发布中的变成已发布
+    		$db->where(['status' => 1])->update(['status' => 2, 'release_time' => time()]);
+    		// 把当前所有选中的变成发布中……
 	    	foreach ($id as $value) {
 	    		$db->where(['id' => $value, 'status' => 0])->update(['status' => 1, 'release_time' => time()]);
 	    	}
+	    	// 版本+1
+	    	ver();
     		return ['status' => 1, 'info' => '发布成功'];
     	}
+    }
+
+    public function api() {
+    	$db = Db::name('info');
+    	// 获取所有发布中的
+    	$res = $db->where('status', 1)->select();
+    	// 加入当前版本号
+    	$ver = include 'ver.php';
+    	$res = array_merge($ver, $res);
+    	return json($res);
     }
 }
