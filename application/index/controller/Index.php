@@ -32,20 +32,38 @@ class Index extends Base
 
 			// 获取表单上传文件
 	        $file = $request->file('pic');
-	        if (empty($file)) {
-	            $this->error('请选择上传文件');
+	        if (!empty($file)) {
+	            // 移动到框架应用根目录/public/uploads/ 目录下
+	        	$info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+
+	        	if ($info) {
+		        	// $this->success('文件上传成功：' . $info->getRealPath());
+					$data['pic'] = str_replace('\\', '/', $info->getSaveName());
+		        } else {
+		            // 上传失败获取错误信息
+		            $this->error($file->getError());
+		        }
 	        }
-	        // 移动到框架应用根目录/public/uploads/ 目录下
-	        $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
-	        if ($info) {
-	            // $this->success('文件上传成功：' . $info->getRealPath());
-				$data['pic'] = str_replace('\\', '/', $info->getSaveName());
-				$data['create_time'] = time();
-    			$res = Db::name('info')->insert($data);
+
+	        $file2 = $request->file('video');
+	        if (!empty($file2)) {
+	            // 移动到框架应用根目录/public/uploads/ 目录下
+	        	$info2 = $file2->validate(['ext' => 'mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+
+	        	if ($info2) {
+		        	// $this->success('文件上传成功：' . $info2->getRealPath());
+					$data['video'] = str_replace('\\', '/', $info2->getSaveName());
+		        } else {
+		            // 上传失败获取错误信息
+		            $this->error($file2->getError());
+		        }
+	        }
+	        $data['create_time'] = time();
+			$res = Db::name('info')->insert($data);
+	        if ($res) {
     			$this->success('添加成功！');
 	        } else {
-	            // 上传失败获取错误信息
-	            $this->error($file->getError());
+	            $this->error('添加失败！');
 	        }
     	} else {
     		return $this->fetch('product-add');
@@ -77,6 +95,20 @@ class Index extends Base
 		        }
 		    }
 
+			// 获取表单上传文件
+	        $file2 = $request->file('video');
+	        if ($file2) {
+	        	// 移动到框架应用根目录/public/uploads/ 目录下
+	        	$info2 = $file2->validate(['ext' => 'mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+	        	if ($info2) {
+		            // $this->success('文件上传成功：' . $info2->getRealPath());
+					$data['video'] = str_replace('\\', '/', $info2->getSaveName());
+		        } else {
+		            // 上传失败获取错误信息
+		            $this->error($file2->getError());
+		        }
+		    }
+
 			$data['create_time'] = time();
     		$res = Db::name('info')->where('id', $id)->update($data);
     		$this->success('更新成功！');
@@ -97,6 +129,18 @@ class Index extends Base
     	$list = Db::name('info')->order('id', 'desc')->paginate(50);
     	$this->assign('list',$list);
         return $this->fetch('product-list');
+    }
+
+    // 查看产品视频
+    public function productVideo(Request $request)
+    {
+    	$id = $request->param('id/d');
+    	$info = Db::name('info')->find($id);
+		if (!$info) {
+			$this->error('信息不存在！');
+		}
+		$this->assign('info', $info);
+    	return $this->fetch('product-video');
     }
 
     public function productSend(Request $request)
@@ -120,9 +164,11 @@ class Index extends Base
     	$db = Db::name('info');
     	// 获取所有发布中的
     	$res = $db->where('status', 1)->select();
-    	// 加入当前版本号
-    	$ver = include 'ver.php';
-    	$res = array_merge($ver, $res);
+    	if ($res) {
+    		// 加入当前版本号
+    		$ver = include 'ver.php';
+    		$res = array_merge($ver, $res);
+    	}
     	return json($res);
     }
 }

@@ -30,7 +30,7 @@
 		<span class="l">
 			<a href="javascript:;" onclick="sendAll()" class="btn btn-success radius">批量发布</a>
 			<button type="button" class="btn btn-success" id="" name="" onclick="productAdd('添加产品','{:url('productAdd')}','','510')"><i class="Hui-iconfont">&#xe600;</i> 添加</button>
-			<a href="javascript:;" onclick="" class="btn btn-success radius">查看接口</a>
+			<a href="{:url('api')}" target="_blank" onclick="" class="btn btn-success radius">查看接口</a>
 		</span>
 		<span class="r">共有数据：<strong>{$list->total()}</strong> 条</span>
 	</div>
@@ -44,6 +44,7 @@
 					<th width="70">数量</th>
 					<th width="70">状态</th>
 					<th width="200">图片</th>
+					<th width="200">视频</th>
 					<th width="120">名称</th>
 					<th>具体描述</th>
 					<th width="100">操作</th>
@@ -57,7 +58,8 @@
 					<td>{$info.begin} ~ {$info.end}</td>
 					<td>{$info.end - $info.begin + 1}件</td>
 					<td>{if condition="$info.status eq 0"}<span class="badge badge-danger">待发布</span>{elseif condition="$info.status eq 1"}<span class="badge badge-success">发布中……</span>{else/}<span class="badge badge-success">已发布</span>{/if}</td>
-					<td><img width="50px" src="/uploads/{$info.pic}"></td>
+					<td>{if condition="$info.pic"}<img width="50px" src="/uploads/{$info.pic}">{else/}无图片{/if}</td>
+					<td>{if condition="$info.video"}<a href="javascript:layer_show('查看视频', '{:url('productVideo',['id'=>$info['id']])}','','510')">查看视频</a>{else/}无视频{/if}</td>
 					<td class="text-l">{$info.name}</td>
 					<td class="text-l">{$info.content}</td>
 					<td class="f-14 product-brand-manage"><a style="text-decoration:none" onclick="productUpdate('编辑','{:url('productUpdate',['id'=>$info['id']])}','','510')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>
@@ -92,7 +94,10 @@ function sendAll() {
 	$('.id_checkbox:checked').each(function(index, el) {
 		id.push($(el).val());
 	});
-	if (id.length == 0) return false;
+	if (id.length == 0) {
+		alert('请选择要发布的内容！')
+		return false;
+	}
 	$.post('{:url('productSend')}', {id:id}, function(res){
 		if (res.status == 1) {
 			alert(res.info);
