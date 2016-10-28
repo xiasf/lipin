@@ -41,3 +41,15 @@ function data_auth_sign($data) {
     $sign = sha1($code); //生成签名
     return $sign;
 }
+
+// 每次发布时版本加1
+function ver() {
+    if (file_exists('ver.php')) {
+        $arr = include 'ver.php';
+    } else {
+        $arr['ver'] = 0;
+    }
+    $arr['ver'] += 1;
+    $arr['date'] = date('Y-m-d H:i:s');
+    file_put_contents('ver.php', '<?php return ' . var_export($arr, true) . ';');
+}

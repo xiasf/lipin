@@ -30,6 +30,7 @@
 		<span class="l">
 			<a href="javascript:;" onclick="sendAll()" class="btn btn-success radius">批量发布</a>
 			<button type="button" class="btn btn-success" id="" name="" onclick="productAdd('添加产品','{:url('productAdd')}','','510')"><i class="Hui-iconfont">&#xe600;</i> 添加</button>
+			<a href="javascript:;" onclick="" class="btn btn-success radius">查看接口</a>
 		</span>
 		<span class="r">共有数据：<strong>{$list->total()}</strong> 条</span>
 	</div>
@@ -55,7 +56,7 @@
 					<td>{$info.id}</td>
 					<td>{$info.begin} ~ {$info.end}</td>
 					<td>{$info.end - $info.begin + 1}件</td>
-					<td>{if condition="$info.status neq 1"}<span class="badge badge-danger">未发布</span>{else/}<span class="badge badge-success">已发布</span>{/if}</td>
+					<td>{if condition="$info.status eq 0"}<span class="badge badge-danger">待发布</span>{elseif condition="$info.status eq 1"}<span class="badge badge-success">发布中……</span>{else/}<span class="badge badge-success">已发布</span>{/if}</td>
 					<td><img width="50px" src="/uploads/{$info.pic}"></td>
 					<td class="text-l">{$info.name}</td>
 					<td class="text-l">{$info.content}</td>
