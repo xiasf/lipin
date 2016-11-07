@@ -39,3 +39,44 @@ CREATE TABLE `lipin_info` (
 -- ----------------------------
 -- Records of lipin_info
 -- ----------------------------
+
+
+-- ----------------------------
+-- Table structure for `lipin_device`
+-- ----------------------------
+DROP TABLE IF EXISTS `lipin_device`;
+CREATE TABLE `lipin_device` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `imei` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
+  `status` tinyint(4) DEFAULT '0' COMMENT '状态，0-禁止，1-通过',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8 COMMENT='设备表';
+
+-- ----------------------------
+-- Records of lipin_device
+-- ----------------------------
+
+
+-- ----------------------------
+-- Table structure for `lipin_device`
+-- ----------------------------
+DROP TABLE IF EXISTS `lipin_validation_log`;
+CREATE TABLE `lipin_validation_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tagid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'NFC标签ID',
+  `imei` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
+  `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '经度',
+  `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '纬度',
+  `request_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
+  `result` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'result',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8 COMMENT='设备表';
+
+-- ----------------------------
+-- Records of lipin_validation_log
+-- ----------------------------
