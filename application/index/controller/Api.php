@@ -22,7 +22,7 @@ class Api extends \think\Controller
 
     public function deviceCheck($imie)
     {
-        if (D::name('device')->where('imie', $imie)->find()) {
+        if (Db::name('device')->where('imie', $imie)->find()) {
             return true;
         } else {
             return false;
@@ -40,7 +40,7 @@ class Api extends \think\Controller
 
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
-                if ($info = D::name('lipin')->where('end', '>=', $getID)->order('id', 'asc')->find()) {
+                if ($info = Db::name('lipin')->where('end', '>=', $getID)->order('id', 'asc')->find()) {
                     $arr['result'] = 'PASS(通过）';
                     $arr['color']  = '#1290CF';
                     $arr = [
@@ -65,7 +65,7 @@ class Api extends \think\Controller
 
             $arr['date'] = date('Y-m-d H:i:s');
             // 记录日志
-            D::name('validation_log')->insert([
+            Db::name('validation_log')->insert([
                 'tagid'       => $getID,
                 'imei'        => $getImei,
                 'latitude'    => $getLatitude,
