@@ -20,9 +20,9 @@ class Api extends \think\Controller
         return json($res);
     }
 
-    public function deviceCheck($imie)
+    public function deviceCheck($imei)
     {
-        if (Db::name('device')->where('imie', $imie)->find()) {
+        if (Db::name('device')->where('imei', $imei)->find()) {
             return true;
         } else {
             return false;
