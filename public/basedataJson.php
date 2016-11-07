@@ -2,18 +2,41 @@
 header("Content-type: application/json");
 $arr = [
 
-'ver' => '6',
+'ver' => '7',
 'date' => '2016-10-19 01:12:22',
 'data' => [
 
-	['begin' => 12513922,
-	'end' => 12513922,
-	'content' => '广东尚正堂集团业务涉及种植、园林绿化、文化、科研、展示展览、企业咨询、销售等领域，其中以发展莞香文化产业为主要业务，致力于打造一个集莞香生态种植、旅游观光、生产加工、科研开发、鉴定检测、交易展览的文化产业平台，塑造莞香国际品牌。',
+	['begin' => 1165819842,
+	'end' => 1165819842,
+	'content' => '文字说明。',
 	'pic' => '',
-'video' => 'http://lipin.uogo8.com/uploads/20161023/12513922.jpg',
+'video' => 'http://lipin.uogo8.com/uploads/20161023/a.mp4',
 	'author' => 'xixi1',
 	'datetime' => '2016-10-18 22:35:11'],
 
+	['begin' => 1165814226,
+	'end' => 1165814226,
+	'content' => '文字说明。品牌。',
+	'pic' => '',
+'video' => 'http://lipin.uogo8.com/uploads/20161023/b.mp4',
+	'author' => 'xixi1',
+	'datetime' => '2016-10-18 22:35:11'],
+	
+	['begin' => 1165810674,
+	'end' => 1165810674,
+	'content' => '文字说明。',
+	'pic' => 'http://lipin.uogo8.com/uploads/20161023/2.png',
+'video' => '',
+	'author' => 'xixi1',
+	'datetime' => '2016-10-18 22:35:11'],
+	
+	['begin' => 1165812466,
+	'end' => 1165812466,
+	'content' => '文字说明。',
+	'pic' => 'http://lipin.uogo8.com/uploads/20161023/2.png',
+'video' => '',
+	'author' => 'xixi1',
+	'datetime' => '2016-10-18 22:35:11'],
 
 ]
 
