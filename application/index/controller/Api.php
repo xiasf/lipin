@@ -53,15 +53,15 @@ class Api extends \think\Controller
                     $arr['color']  = '#C10000';
                     $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                     $arr['pic']    = ['http://lipin.uogo8.com/no/label.jpg'];
-                    $arr['content'] = '';
+                    $arr['content'] = 'Failed to pass（不通过）';
                     $arr['video'] = '';
                 }
             } else {
-                $arr['result'] = '手机非官方指定，请与官方取得联系授权';
+                $arr['result'] = '手机非官方指定';
                 $arr['color']  = '#C10000';
                 $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                 $arr['pic']    = ['http://lipin.uogo8.com/no/phone.jpg'];
-                $arr['content'] = '';
+                $arr['content'] = '手机非官方指定，请与官方取得联系授权';
                 $arr['video'] = '';
             }
 
