@@ -70,7 +70,7 @@ class Api extends \think\Controller
                 'imei'        => $getImei,
                 'latitude'    => $getLatitude,
                 'longitude'   => $getLongitude,
-                'request_ip'  => get_id(),
+                'request_ip'  => $request->ip(),
                 'result'      => $arr['result'],
                 'create_time' => time()
             ]);
