@@ -75,7 +75,8 @@ class Api extends \think\Controller
                 'create_time' => time()
             ]);
 
-            return $this->s(['Pragma' => 'no-cache'])->json($arr);
+            return $this->json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
+            // return json($data)->code(201)->header(['Cache-control' => 'no-cache,must-revalidate']);
         }
     }
 
