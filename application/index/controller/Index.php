@@ -205,15 +205,6 @@ class Index extends Base
         }
     }
 
-    public function deviceCheck($imie)
-    {
-        if (D::name('device')->where('imie', $imie)->find()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     // 验证日志列表
     public function validationLogList()
