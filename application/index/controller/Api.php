@@ -41,13 +41,13 @@ class Api extends \think\Controller
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
                 if ($info = Db::name('info')->where('end', '>=', $getID)->order('id', 'asc')->find()) {
-                    $arr['result'] = 'PASS(通过）';
-                    $arr['color']  = '#1290CF';
                     $arr = [
                         "video"   => $info['video'],
                         "pic"     => explode(',' ,$info['pic']),
                         "content" => $info['content']
                     ];
+                    $arr['result'] = 'PASS(通过）';
+                    $arr['color']  = '#1290CF';
                 } else {
                     $arr['result'] = 'Failed to pass（不通过）';
                     $arr['color']  = '#C10000';
