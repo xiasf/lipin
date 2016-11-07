@@ -22,7 +22,7 @@ class Api extends \think\Controller
 
     public function deviceCheck($imei)
     {
-        if (Db::name('device')->where('imei', $imei)->find()) {
+        if ($info = Db::name('device')->where(['imei' => $imei, 'status' => 1])->find()) {
             return true;
         } else {
             return false;
@@ -57,7 +57,7 @@ class Api extends \think\Controller
                     $arr['video'] = '';
                 }
             } else {
-                $arr['result'] = '手机非官方指定';
+                $arr['result'] = '手机非官方指定，请与官方取得联系授权';
                 $arr['color']  = '#C10000';
                 $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                 $arr['pic']    = ['http://lipin.uogo8.com/no/phone.jpg'];
