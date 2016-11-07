@@ -4,7 +4,7 @@ namespace app\index\controller;
 use think\Db;
 use think\Request;
 
-class Api extends Base
+class Api extends \think\Controller
 {
 
     public function api()
