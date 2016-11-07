@@ -45,7 +45,7 @@ class Api extends \think\Controller
                     $arr['color']  = '#1290CF';
                     $arr = [
                         "video"   => $info['video'],
-                        "pic"     => implode(',' ,$info['pic']),
+                        "pic"     => explode(',' ,$info['pic']),
                         "content" => $info['content']
                     ];
                 } else {
