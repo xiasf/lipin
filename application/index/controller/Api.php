@@ -44,8 +44,6 @@ class Api extends \think\Controller
                     $arr['result'] = 'PASS(通过）';
                     $arr['color']  = '#1290CF';
                     $arr = [
-                        "tagid"   => $getID,
-                        "imei"    => $getImei,
                         "video"   => $info['video'],
                         "pic"     => implode(',' ,$info['pic']),
                         "content" => $info['content']
@@ -55,13 +53,20 @@ class Api extends \think\Controller
                     $arr['color']  = '#C10000';
                     $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                     $arr['pic']    = 'http://lipin.uogo8.com/no/label.jpg';
+                    $arr['content'] = '';
+                    $arr['video'] = '';
                 }
             } else {
                 $arr['result'] = '手机非官方指定';
                 $arr['color']  = '#C10000';
                 $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                 $arr['pic']    = 'http://lipin.uogo8.com/no/phone.jpg';
+                $arr['content'] = '';
+                $arr['video'] = '';
             }
+
+            $arr['tagid'] = $getID;
+            $arr['imei'] = $getImei;
 
             $arr['date'] = date('Y-m-d H:i:s');
             // 记录日志
