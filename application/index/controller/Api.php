@@ -52,7 +52,7 @@ class Api extends \think\Controller
                     $arr['result'] = 'Failed to pass（不通过）';
                     $arr['color']  = '#C10000';
                     $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
-                    $arr['pic']    = 'http://lipin.uogo8.com/no/label.jpg';
+                    $arr['pic']    = ['http://lipin.uogo8.com/no/label.jpg'];
                     $arr['content'] = '';
                     $arr['video'] = '';
                 }
@@ -60,7 +60,7 @@ class Api extends \think\Controller
                 $arr['result'] = '手机非官方指定';
                 $arr['color']  = '#C10000';
                 $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
-                $arr['pic']    = 'http://lipin.uogo8.com/no/phone.jpg';
+                $arr['pic']    = ['http://lipin.uogo8.com/no/phone.jpg'];
                 $arr['content'] = '';
                 $arr['video'] = '';
             }
