@@ -111,7 +111,7 @@ class Api extends \think\Controller
             ]);
 
             // 最后活跃时间
-            Db::name('device')->update(['active_time' => time()]);
+            Db::name('device')->where('imei', $getImei)->update(['active_time' => time()]);
 
             return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
             // return json($data)->code(201)->header(['Cache-control' => 'no-cache,must-revalidate']);
