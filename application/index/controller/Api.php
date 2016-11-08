@@ -53,7 +53,7 @@ class Api extends \think\Controller
                     $arr['color']  = '#C10000';
                     $arr['logo']   = 'http://lipin.uogo8.com/no/logo.png';
                     $arr['pic']    = ['http://lipin.uogo8.com/no/label.jpg'];
-                    $arr['content'] = 'Failed to pass（不通过）';
+                    $arr['content'] = '该物品未经验证！';
                     $arr['video'] = '';
                 }
             } else {

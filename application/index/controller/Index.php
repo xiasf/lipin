@@ -6,6 +6,29 @@ use think\Request;
 
 class Index extends Base
 {
+
+    public function test(Request $request)
+    {
+        if ($request->isPost()) {
+            $file = $request->file('logo');
+            if (!empty($file)) {
+                // 移动到框架应用根目录/public/uploads/ 目录下
+                $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+
+                if ($info) {
+                    // $this->success('文件上传成功：' . $info->getRealPath());
+                    $data['logo'] = str_replace('\\', '/', $info->getSaveName());
+                    echo $data['logo'];
+                } else {
+                    // 上传失败获取错误信息
+                    $this->error($file->getError());
+                }
+            }
+        } else {
+            return $this->fetch('test');
+        }
+    }
+
     public function index()
     {
         return $this->fetch();
