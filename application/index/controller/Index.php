@@ -10,6 +10,9 @@ class Index extends Base
     public function test(Request $request)
     {
         if ($request->isPost()) {
+            echo '<pre>';
+            print_r($_FILES);
+            echo '</pre>';
             $file = $request->file('logo');
             if (!empty($file)) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
@@ -25,7 +28,7 @@ class Index extends Base
                 }
             }
 
-            $file2 = $request->file('video');
+            $file2 = $request->file('video');var_dump($file2);
             if (!empty($file2)) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info2 = $file2->validate(['ext' => 'mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
