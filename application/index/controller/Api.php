@@ -13,6 +13,7 @@ class Api extends \think\Controller
           'ver' => 1,
           'apk' => 'http://lipin.uogo8.com/NfcCrad.apk',
           'imei' => $request->get('imei/s'),
+          'tel' => $request->get('tel/s'),
         ];
         return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
     }

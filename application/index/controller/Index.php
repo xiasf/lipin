@@ -64,6 +64,9 @@ class Index extends Base
 
             // return $request->post();
             $data = $request->post();
+
+            /*
+             * 暂时停用起止
             if (($data['end'] && $data['begin']) && ($data['end'] > $data['begin'])) {
 
                 // 获取上一批次的最后一个标签号
@@ -76,6 +79,7 @@ class Index extends Base
             } else {
                 $this->error('起止填写错误！');
             }
+            */
 
             // 获取表单上传文件
             $file = $request->file('pic');
@@ -204,6 +208,50 @@ class Index extends Base
             // 版本+1
             ver();
             return ['status' => 1, 'info' => '发布成功'];
+        }
+    }
+
+
+
+    public function tagAdd(Request $request)
+    {
+        if ($request->isPost()) {
+            $data = $request->post();
+
+            if (Db::name('info')->find())
+
+            $data['create_time'] = time();
+            $res = Db::name('tag')->insert($data);
+            if ($res) {
+                $this->success('添加成功！');
+            } else {
+                $this->error('添加失败！');
+            }
+        } else {
+            return $this->fetch('tag-add');
+        }
+    }
+
+    public function tagList()
+    {
+        $list = Db::name('tag')->order('id', 'desc')->paginate(50);
+        $this->assign('list',$list);
+        return $this->fetch('tag-list');
+    }
+
+    public function tagUpdate(Request $request)
+    {
+        if ($request->isPost()) {
+            $data['create_time'] = time();
+            $res = Db::name('tag')->where('id', $id)->update($data);
+            $this->success('更新成功！');
+        } else {
+            $tag = Db::name('tag')->find($id);
+            if (!$tag) {
+                $this->error('信息不存在！');
+            }
+            $this->assign('info',$tag);
+            return $this->fetch('tag-update');
         }
     }
 

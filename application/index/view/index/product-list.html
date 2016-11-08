@@ -39,10 +39,10 @@
 			<thead>
 				<tr class="text-c">
 					<th width="25"><input type="checkbox" name="" value=""></th>
-					<th width="70">批次</th>
-					<th width="70">起止</th>
-					<th width="70">数量</th>
-					<th width="70">状态</th>
+					<th width="70">ID</th>
+					<!-- <th width="70">起止</th> -->
+					<!-- <th width="70">数量</th> -->
+					<!-- <th width="70">状态</th> -->
 					<th width="200">图片</th>
 					<th width="200">视频</th>
 					<th width="120">名称</th>
@@ -55,9 +55,6 @@
 				<tr class="text-c">
 					<td><input name="id" class="id_checkbox" type="checkbox" value="{$info.id}"></td>
 					<td>{$info.id}</td>
-					<td>{$info.begin} ~ {$info.end}</td>
-					<td>{$info.end - $info.begin + 1}件</td>
-					<td>{if condition="$info.status eq 0"}<span class="badge badge-danger">待发布</span>{elseif condition="$info.status eq 1"}<span class="badge badge-success">发布中……</span>{else/}<span class="badge badge-success">已发布</span>{/if}</td>
 					<td>{if condition="$info.pic"}<img width="50px" src="/uploads/{$info.pic}">{else/}无图片{/if}</td>
 					<td>{if condition="$info.video"}<a href="javascript:layer_show('查看视频', '{:url('productVideo',['id'=>$info['id']])}','','510')">查看视频</a>{else/}无视频{/if}</td>
 					<td class="text-l">{$info.name}</td>
