@@ -57,6 +57,7 @@ class Api extends \think\Controller
 
     public function validPost(Request $request)
     {
+
         if ($request->isPost()) {
             $getID        = $request->post('tagid/d');        //标签ID
             $getImei      = $request->post('imei/s');         //手机序号
@@ -67,7 +68,7 @@ class Api extends \think\Controller
 
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
-                if ($getID && ($info = Db::name('tag')->alias('t')->join('__INFO__ i')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
+                if ($getID && ($info = Db::name('tag')->alias('t')->join('__INFO__ i', 't.pid = i.id')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
                     $arr = [
                         "video"   => $info['video'],
                         "pic"     => explode(',' ,$info['pic']),
