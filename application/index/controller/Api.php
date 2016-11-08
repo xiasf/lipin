@@ -71,7 +71,7 @@ class Api extends \think\Controller
                 if ($getID && ($info = Db::name('tag')->alias('t')->join('__INFO__ i', 't.pid = i.id')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
                     $arr = [
                         "video"   => $request->root(true) . '/uploads/' . $info['video'],
-                        "pic"     => array_map(function($map){return $request->root(true) . '/uploads/' . $map;}, explode(',' ,$info['pic'])),
+                        "pic"     => array_map(function($map) use($request) {return $request->root(true) . '/uploads/' . $map;}, explode(',' ,$info['pic'])),
                         "content" => $info['content']
                     ];
                     $arr['result'] = 'PASS(通过）';
