@@ -10,7 +10,7 @@ class Api extends \think\Controller
     public function ver(Request $request)
     {
         $arr  = [
-          'ver' => 2,
+          'ver' => 1,
           'apk' => 'http://lipin.uogo8.com/NfcCrad.apk',
           'imei' => $request->get('imei/s'),
         ];
