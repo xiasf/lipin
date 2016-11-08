@@ -196,6 +196,7 @@ class Index extends Base
 
     public function productSend(Request $request)
     {
+        return '停用';
         $id = $request->post('id/a');
         if (!empty($id)) {
             $db = Db::name('info');
@@ -212,6 +213,21 @@ class Index extends Base
     }
 
 
+    public function tagSend(Request $request)
+    {
+        if ($request->isPost()) {
+            $id = $request->post('id/a');
+            if (!empty($id)) {
+                $db = Db::name('tag');
+                foreach ($id as $value) {
+                    $db->where(['id' => $value, 'status' => 0])->update(['status' => 1, 'update_time' => time()]);
+                }
+                return ['status' => 1, 'info' => '发布成功'];
+            }
+        }
+    }
+
+
 
     public function tagAdd(Request $request)
     {
@@ -220,6 +236,10 @@ class Index extends Base
 
             if (!Db::name('info')->where('id', $data['pid'])->find()) {
                 $this->error('资料库ID非法！');
+            }
+
+            if (Db::name('tag')->where('tagid', $data['tagid'])->find()) {
+                $this->error('NFC标签ID已经存在！');
             }
 
             $data['create_time'] = time();
@@ -302,8 +322,55 @@ class Index extends Base
     public function validationLogList()
     {
         $list = Db::name('validation_log')->order('id', 'desc')->paginate(50);
-        $this->assign('list',$list);
+        $this->assign('list', $list);
         return $this->fetch('validation-log-list');
+    }
+
+
+    // 软件发布
+    public function release(Request $request)
+    {
+        if ($request->isPost()) {
+
+            $data = $request->post();
+
+            // 获取表单上传文件
+            $file = $request->file('apk');
+            if (!empty($file)) {
+                // 移动到框架应用根目录/public/uploads/ 目录下
+                $info = $file->validate(['ext' => 'apk'])->move(ROOT_PATH . 'public' . DS . 'ApkRelease');
+
+                if ($info) {
+                    $fileInfo = $info->getInfo();
+                    // $this->success('文件上传成功：' . $info->getRealPath());
+                    $data['url'] = str_replace('\\', '/', $info->getSaveName());
+                    $data['size'] = $fileInfo['size'];
+                    $data['md5'] = $info->md5();
+                } else {
+                    // 上传失败获取错误信息
+                    $this->error($file->getError());
+                }
+            }
+
+            $data['create_time'] = time();
+            $res = Db::name('release')->insert($data);
+            if ($res) {
+                $this->success('发布成功！');
+            } else {
+                $this->error('发布失败！');
+            }
+        } else {
+            return $this->fetch('release');
+        }
+    }
+
+
+    // 软件发布记录
+    public function releaseLog()
+    {
+        $list = Db::name('release')->order('id', 'desc')->paginate(50);
+        $this->assign('list', $list);
+        return $this->fetch('release-log-list');
     }
 
 }

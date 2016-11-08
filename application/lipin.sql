@@ -98,3 +98,25 @@ CREATE TABLE `lipin_validation_log` (
 -- ----------------------------
 -- Records of lipin_validation_log
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `lipin_release`
+-- ----------------------------
+DROP TABLE IF EXISTS `lipin_release`;
+CREATE TABLE `lipin_release` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ver` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'ver',
+  `url` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'url',
+  `size` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'size',
+  `md5` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'md5',
+  `type` tinyint(4) DEFAULT '0' COMMENT '类型，0-稳定版，1-测试版，2-重要版',
+  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='软件发布表';
+
+-- ----------------------------
+-- Records of lipin_release
+-- ----------------------------
+
