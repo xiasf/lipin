@@ -90,14 +90,15 @@ DROP TABLE IF EXISTS `lipin_validation_log`;
 CREATE TABLE `lipin_validation_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tagid` varchar(100) NOT NULL DEFAULT '0' COMMENT 'NFC标签ID',
-  `imei` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
-  `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '经度',
-  `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '纬度',
-  `request_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
-  `color` varchar(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
-  `result` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'result',
-  `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  `imei` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '设备imei',
+  `mobile` char(15) NULL COMMENT 'mobile',
+  `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '经度',
+  `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '纬度',
+  `request_ip` bigint(20) NULL DEFAULT '0' COMMENT '请求IP',
+  `color` varchar(20) NULL DEFAULT '0' COMMENT '请求IP',
+  `result` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT 'result',
+  `create_time` int(10) unsigned NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(10) unsigned NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='请求日志表';
 
