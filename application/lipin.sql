@@ -89,8 +89,8 @@ CREATE TABLE `lipin_device` (
 DROP TABLE IF EXISTS `lipin_validation_log`;
 CREATE TABLE `lipin_validation_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tagid` varchar(100) unsigned NULL DEFAULT '0' COMMENT 'NFC标签ID',
-  `imei` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
+  `tagid` varchar(100) NOT NULL DEFAULT '0' COMMENT 'NFC标签ID',
+  `imei` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
   `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '经度',
   `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '纬度',
   `request_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
