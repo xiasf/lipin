@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/Hui-iconfont/1.0.7/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/icheck/icheck.css" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/green/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/style.css" />
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
@@ -69,7 +69,7 @@
 	<input runat="server" id="divScrollValue" type="hidden" value="" />
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 礼品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe616;</i> 资料库管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a _href="{:url('productList')}" data-title="礼品列表" href="javascript:void(0)">礼品列表</a></li>
@@ -91,6 +91,14 @@
 			<dd>
 				<ul>
 					<li><a _href="{:url('validationLogList')}" data-title="日志列表" href="javascript:void(0)">日志列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<dl>
+			<dt><i class="Hui-iconfont">&#xe616;</i> 软件发布<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="{:url('release')}" data-title="软件发布" href="javascript:void(0)">软件发布</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -122,6 +130,7 @@ function productAdd(title,url,w,h){
 	layer_show(title,url,w,h);
 }
 $(function(){
+	// 展开菜单
 	$('#menu-article dt:first-child').trigger('click');
 });
 </script>

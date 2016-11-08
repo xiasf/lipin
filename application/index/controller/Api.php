@@ -7,6 +7,15 @@ use think\Request;
 class Api extends \think\Controller
 {
 
+    public function ver()
+    {
+        $arr  = [
+          'ver' => 2,
+          'apk' => 'http://lipin.uogo8.com/NfcCrad.apk'
+        ];
+        return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
+    }
+
     public function api()
     {
         $db = Db::name('info');
