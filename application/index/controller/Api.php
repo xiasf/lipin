@@ -9,9 +9,11 @@ class Api extends \think\Controller
 
     public function ver(Request $request)
     {
+        $info = Db::name('release')->order('id', 'desc')->find();
         $arr  = [
-          'ver' => 1,
-          'apk' => 'http://lipin.uogo8.com/NfcCrad.apk',
+          'ver' => $info['ver'],
+          'apk' => $request->root(true) . '/ApkRelease/' . $info['url'],
+          'size' => $info['size'],
           'imei' => $request->get('imei/s'),
           'tel' => $request->get('tel/s'),
         ];
