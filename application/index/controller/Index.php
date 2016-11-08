@@ -218,7 +218,9 @@ class Index extends Base
         if ($request->isPost()) {
             $data = $request->post();
 
-            if (Db::name('info')->find())
+            if (!Db::name('info')->where('id', $data['pid'])->find()) {
+                $this->error('资料库ID非法！');
+            }
 
             $data['create_time'] = time();
             $res = Db::name('tag')->insert($data);

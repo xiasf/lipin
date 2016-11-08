@@ -48,6 +48,7 @@ class Api extends \think\Controller
             $getToken     = $request->post('token');        //授权码
             $getLatitude  = $request->post('latitude');     //纬度
             $getLongitude = $request->post('longitude');    //经度
+            $getTel = $request->post('tel');    //tel
 
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
@@ -78,6 +79,7 @@ class Api extends \think\Controller
 
             $arr['tagid'] = $getID;
             $arr['imei'] = $getImei;
+            $arr['tel'] = $getTel;
 
             $arr['date'] = date('Y-m-d H:i:s');
             // 记录日志

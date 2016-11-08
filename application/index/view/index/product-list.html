@@ -28,7 +28,6 @@
 <div class="page-container">
 	<div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
-			<a href="javascript:;" onclick="sendAll()" class="btn btn-success radius">批量发布</a>
 			<button type="button" class="btn btn-success" id="" name="" onclick="productAdd('添加产品','{:url('productAdd')}','','510')"><i class="Hui-iconfont">&#xe600;</i> 添加</button>
 			<a href="{:url('api')}" target="_blank" onclick="" class="btn btn-success radius">查看接口</a>
 		</span>
@@ -85,25 +84,6 @@ function productAdd(title,url,w,h){
 function productUpdate(title,url,w,h){
 	alert('暂不允许修改哦！');
 	layer_show(title,url,w,h);
-}
-
-function sendAll() {
-	id = [];
-	$('.id_checkbox:checked').each(function(index, el) {
-		id.push($(el).val());
-	});
-	if (id.length == 0) {
-		alert('请选择要发布的内容！')
-		return false;
-	}
-	$.post('{:url('productSend')}', {id:id}, function(res){
-		if (res.status == 1) {
-			alert(res.info);
-			window.location.reload();
-		} else {
-			alert('发布失败');
-		}
-	}, 'json');
 }
 
 </script>
