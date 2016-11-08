@@ -57,9 +57,8 @@ class Api extends \think\Controller
 
     public function validPost(Request $request)
     {
-
         if ($request->isPost()) {
-            $getID        = $request->post('tagid/d');        //标签ID
+            $getID        = $request->post('tagid/s');        //标签ID
             $getImei      = $request->post('imei/s');         //手机序号
             $getToken     = $request->post('token');        //授权码
             $getLatitude  = $request->post('latitude');     //纬度

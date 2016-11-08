@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `lipin_tag`;
 CREATE TABLE `lipin_tag` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属资料库ID',
-  `tagid` bigint(20) NOT NULL DEFAULT '0' COMMENT 'NFC标签ID',
+  `tagid` varchar(100) NOT NULL DEFAULT '0' COMMENT 'NFC标签ID',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `status` tinyint(4) DEFAULT '0' COMMENT '状态，0-停用，1-启用',
