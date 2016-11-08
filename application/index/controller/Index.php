@@ -18,12 +18,28 @@ class Index extends Base
                 if ($info) {
                     // $this->success('文件上传成功：' . $info->getRealPath());
                     $data['logo'] = str_replace('\\', '/', $info->getSaveName());
-                    echo $info->getRealPath();
+                    echo $info->getRealPath(). '<br />';
                 } else {
                     // 上传失败获取错误信息
                     $this->error($file->getError());
                 }
             }
+
+            $file2 = $request->file('video');
+            if (!empty($file2)) {
+                // 移动到框架应用根目录/public/uploads/ 目录下
+                $info2 = $file2->validate(['ext' => 'mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+
+                if ($info2) {
+                    // $this->success('文件上传成功：' . $info2->getRealPath());
+                    $data['video'] = str_replace('\\', '/', $info2->getSaveName());
+                    echo $info->getRealPath();
+                } else {
+                    // 上传失败获取错误信息
+                    $this->error($file2->getError());
+                }
+            }
+
         } else {
             return $this->fetch('test');
         }
