@@ -7,6 +7,19 @@ use think\Request;
 class Api extends \think\Controller
 {
 
+    public function recordGetdata(Request $request)
+    {
+        //GET imei 判断
+        $imei = $request->get('imei/s');
+        $arr = Db::name('validation_log')->field('color,tagid,create_time,result')->where('imei', $imei)->order('id', 'desc')->limit(50)->select();
+        foreach ($arr as &$value) {
+            $arr['tagid'] .= "认证ID：",
+            $arr['date'] = date('m月d', $arr['create_time']),
+            $arr['time'] = date('H:i', $arr['create_time']),
+        }
+        return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
+    }
+
     public function ver(Request $request)
     {
         $info = Db::name('release')->order('id', 'desc')->find();
@@ -93,6 +106,7 @@ class Api extends \think\Controller
                 'longitude'   => $getLongitude,
                 'request_ip'  => $request->ip(),
                 'result'      => $arr['result'],
+                'color'      => $arr['color'],
                 'create_time' => time()
             ]);
 

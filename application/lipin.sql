@@ -89,6 +89,7 @@ CREATE TABLE `lipin_validation_log` (
   `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '经度',
   `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '纬度',
   `request_ip` bigint(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
+  `color` bigint(20) NOT NULL DEFAULT '0' COMMENT '请求IP',
   `result` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT 'result',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
