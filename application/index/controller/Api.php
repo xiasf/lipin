@@ -14,6 +14,7 @@ class Api extends \think\Controller
           'ver' => $info['ver'],
           'apk' => $request->root(true) . '/ApkRelease/' . $info['url'],
           'size' => $info['size'],
+          'text' => $info['text'],
           'imei' => $request->get('imei/s'),
           'tel' => $request->get('tel/s'),
         ];
