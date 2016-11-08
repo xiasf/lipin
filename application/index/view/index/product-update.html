@@ -40,33 +40,23 @@
 			</div>
 		</div>
 
-		<div class="row cl">
+<!-- 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>起止：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" name="begin" id="" placeholder="输入起" value="" class="input-text" style=" width:25%" disabled>
 				<input type="text" name="end" id="" placeholder="输入止" value="" class="input-text" style=" width:25%" disabled>
 			</div>
-		</div>
-
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
-			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
-				<div class="radio-box">
-					<input name="status" type="radio" id="status-1" value="1" disabled>
-					<label for="status-1">发布</label>
-				</div>
-				<div class="radio-box">
-					<input type="radio" id="status-2" name="status" value="0" disabled>
-					<label for="status-2">不发布</label>
-				</div>
-			</div>
-		</div>
-<!-- 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile">
-			</div>
 		</div> -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">logo：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+
+				<input class="input-text upload-url" type="text" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" multiple name="logo" class="input-file">
+				</span>
+			</div>
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">图片：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
@@ -78,10 +68,19 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">视频：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input class="input-text upload-url" type="text" id="uploadfile" readonly nullmsg="请添加视频！" style="width:200px">
+				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" name="video" class="input-file">
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="content" cols="" rows="" class="textarea"  placeholder="描述..." onKeyUp="textarealength(this,100)"></textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+				<textarea name="content" cols="" rows="" class="textarea"  placeholder="描述..." onKeyUp="textarealength(this,10000)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/10000</p>
 			</div>
 		</div>
 		<div class="row cl">
@@ -113,6 +112,8 @@ $(function(){
     formObj.init(info);
     $('#uploadfile').val(info.pic);
     // $('input[name=status]').val(info.static);
+
+
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
