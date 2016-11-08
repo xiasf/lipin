@@ -10,7 +10,7 @@ class Api extends \think\Controller
     public function recordGetdata(Request $request)
     {
         $imei = $request->get('imei/s');
-        $arr = Db::name('validation_log')->field('color,tagid,create_time,result')->where('imei', $imei)->order('id', 'desc')->limit(50)->select();
+        $arr = Db::name('validation_log')->field('color,tagid,create_time,result')->where('imei', $imei)->order('id', 'desc')->limit(100)->select();
         foreach ($arr as &$value) {
             $value['tagid'] = "认证ID：" . $value['tagid'];
             $value['date'] = date('m月d', $value['create_time']);
@@ -109,6 +109,9 @@ class Api extends \think\Controller
                 'color'      => $arr['color'],
                 'create_time' => time()
             ]);
+
+            // 最后活跃时间
+            Db::name('device')->update(['active_time' => time()]);
 
             return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
             // return json($data)->code(201)->header(['Cache-control' => 'no-cache,must-revalidate']);
