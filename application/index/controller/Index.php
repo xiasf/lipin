@@ -11,8 +11,6 @@ class Index extends Base
     {
         if ($request->isPost()) {
             $file = $request->file('logo');
-            $file2 = $request->file('video');
-
             if (!empty($file)) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
@@ -27,6 +25,7 @@ class Index extends Base
                 }
             }
 
+            $file2 = $request->file('video');
             if (!empty($file2)) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info2 = $file2->validate(['ext' => 'mp4'])->move(ROOT_PATH . 'public' . DS . 'uploads');
