@@ -18,7 +18,7 @@ class Index extends Base
                 if ($info) {
                     // $this->success('文件上传成功：' . $info->getRealPath());
                     $data['logo'] = str_replace('\\', '/', $info->getSaveName());
-                    echo $data['logo'];
+                    echo $info->getRealPath();
                 } else {
                     // 上传失败获取错误信息
                     $this->error($file->getError());
