@@ -1,4 +1,10 @@
-<?php return array (
-  'ver' => 2,
-  'date' => '2016-10-28 15:30:02',
-);
+<?php 
+header("Content-type: application/json");
+$arr  = [
+  'ver' => 1,
+  'apk' => 'http://lipin.uogo8.com/NfcCrad.apk'
+];
+
+$str = json_encode($arr);
+
+echo $str;
