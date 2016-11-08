@@ -12,9 +12,9 @@ class Api extends \think\Controller
         $imei = $request->get('imei/s');
         $arr = Db::name('validation_log')->field('color,tagid,create_time,result')->where('imei', $imei)->order('id', 'desc')->limit(50)->select();
         foreach ($arr as &$value) {
-            $arr['tagid'] .= "认证ID：";
-            $arr['date'] = date('m月d', $arr['create_time']);
-            $arr['time'] = date('H:i', $arr['create_time']);
+            $value['tagid'] = "认证ID：" . $value['tagid'];
+            $value['date'] = date('m月d', $value['create_time']);
+            $value['time'] = date('H:i', $value['create_time']);
         }
         return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
     }
