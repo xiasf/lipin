@@ -54,7 +54,7 @@ class Api extends \think\Controller
 
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
-                if ($getID && ($info = Db::name('info')->where('end', '>=', $getID)->order('id', 'asc')->find())) {
+                if ($getID && ($info = Db::name('release')->where('tagid', $getID)->find())) {
                     $arr = [
                         "video"   => $info['video'],
                         "pic"     => explode(',' ,$info['pic']),
