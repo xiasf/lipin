@@ -7,11 +7,12 @@ use think\Request;
 class Api extends \think\Controller
 {
 
-    public function ver()
+    public function ver(Request $request)
     {
         $arr  = [
           'ver' => 2,
-          'apk' => 'http://lipin.uogo8.com/NfcCrad.apk'
+          'apk' => 'http://lipin.uogo8.com/NfcCrad.apk',
+          'imei' => $request->get('imei/s'),
         ];
         return json($arr, 200, ['Cache-control' => 'no-cache,must-revalidate']);
     }
