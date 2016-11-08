@@ -13,7 +13,7 @@ class Index extends Base
             echo '<pre>';
             print_r($_FILES);
             echo '</pre>';
-            $file = $request->file('logo');
+            $file = $request->file('logo');var_dump($file);
             if (!empty($file)) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
@@ -21,7 +21,7 @@ class Index extends Base
                 if ($info) {
                     // $this->success('文件上传成功：' . $info->getRealPath());
                     $data['logo'] = str_replace('\\', '/', $info->getSaveName());
-                    echo $info->getRealPath(). '<br />';
+                    echo '<br />'.$info->getRealPath(). '<br />';
                 } else {
                     // 上传失败获取错误信息
                     $this->error($file->getError());
