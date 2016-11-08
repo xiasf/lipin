@@ -69,6 +69,7 @@ class Api extends \think\Controller
                 // 得到满足条件的批次
                 if ($getID && ($info = Db::name('tag')->alias('t')->join('__INFO__ i', 't.pid = i.id')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
                     $arr = [
+                        "logo"   => $request->root(true) . '/uploads/' . $info['logo'],
                         "video"   => $request->root(true) . '/uploads/' . $info['video'],
                         "pic"     => array_map(function($map) use($request) {return $request->root(true) . '/uploads/' . $map;}, explode(',' ,$info['pic'])),
                         "content" => $info['content']
