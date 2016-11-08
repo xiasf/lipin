@@ -33,7 +33,7 @@ class Index extends Base
                 if ($info2) {
                     // $this->success('文件上传成功：' . $info2->getRealPath());
                     $data['video'] = str_replace('\\', '/', $info2->getSaveName());
-                    echo $info->getRealPath();
+                    echo $info2->getRealPath();
                 } else {
                     // 上传失败获取错误信息
                     $this->error($file2->getError());
