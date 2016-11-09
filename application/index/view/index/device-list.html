@@ -56,7 +56,7 @@
 					<td>{$info.create_time|date='Y-m-d H:i:s',###}</td>
 					<td>{$info.active_time|date='Y-m-d H:i:s',###}</td>
 					<td>{if condition="$info.status eq 1"}<span class="badge badge-success">通过</span>{else/}<span class="badge badge-danger">禁止</span>{/if}</td>
-					<td class="f-14 device-brand-manage"><a style="text-decoration:none" onclick="deviceUpdate('编辑','{:url('deviceUpdate',['id'=>$info['id']])}','','510')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a><a style="text-decoration:none" onclick="deviceDelete({$info['id']})" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6df;</i></a></td>
+					<td class="f-14 device-brand-manage"><a style="text-decoration:none" onclick="deviceUpdate('编辑','{:url('deviceUpdate',['id'=>$info['id']])}','','510')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a><a style="text-decoration:none" onclick="deviceDelete({$info['id']})" href="javascript:;" title="删除">删除</a></td>
 				</tr>
 				{/volist}
 			</tbody>
@@ -90,6 +90,7 @@ function deviceDelete(id){
         	$.post('{:url('deviceDelete')}', {id:id}, function(res) {
 			    if (res.status == 1) {
 			        layer.msg('删除成功！', {icon: 1});
+			        window.location.reload();
 			    } else {
 			        layer.msg('删除失败！', {icon: 1});
 			    }

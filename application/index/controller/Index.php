@@ -361,7 +361,9 @@ class Index extends Base
 
     public function deviceUpdate(Request $request)
     {
+        $id = $request->param('id/d');
         if ($request->isPost()) {
+            $data = $request->post();
             $data['create_time'] = time();
             $res = Db::name('device')->where('id', $id)->update($data);
             $this->success('更新成功！');
@@ -370,7 +372,7 @@ class Index extends Base
             if (!$device) {
                 $this->error('信息不存在！');
             }
-            $this->assign('info',$device);
+            $this->assign('info', $device);
             return $this->fetch('device-update');
         }
     }
@@ -379,7 +381,8 @@ class Index extends Base
     {
         if ($request->isPost()) {
             $id = $request->post('id/d');
-            Db::name();
+            Db::name('device')->where('id', $id)->delete();
+            return ['status' => 1, 'info' => '删除成功'];
         }
     }
 
