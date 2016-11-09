@@ -238,26 +238,40 @@ class Index extends Base
 
     public function picUpload(Request $request)
     {
-        if ($request->isPost()) {
-            // 获取表单上传文件
-            $picList = request()->file('pic');
-            if (!empty($picList)) {
-                foreach ($picList as $file) {
-                    // 移动到框架应用根目录/public/uploads/ 目录下
-                    $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
-                    if ($info) {
-                        // 成功上传后 获取上传信息
-                        // echo $info->getSaveName() . '<br />';
-                        $picList[] = str_replace('\\', '/', $info->getSaveName());
-                    } else {
-                        // 上传失败获取错误信息
-                        // echo $file->getError() . '<br />';
-                        $this->error($file->getError());
-                    }
-                }
+
+        // if ($request->isPost()) {
+        //     // 获取表单上传文件
+        //     $picList = request()->file('Filedata');
+        //     if (!empty($picList)) {
+        //         foreach ($picList as $file) {
+        //             // var_dump( $file);
+        //             // 移动到框架应用根目录/public/uploads/ 目录下
+        //             $info = $file->validate(['ext' => 'gif,jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+        //             if ($info) {
+        //                 // 成功上传后 获取上传信息
+        //                 // echo $info->getSaveName() . '<br />';
+        //                 $picList[] = str_replace('\\', '/', $info->getSaveName());
+        //             } else {
+        //                 // 上传失败获取错误信息
+        //                 // echo $file->getError() . '<br />';
+        //                 $this->error($file->getError());
+        //             }
+        //         }
+        //     }
+
+        $logoFile = $request->file('Filedata');
+        if (!empty($logoFile)) {
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $logoFile->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if ($info) {
+                // $this->success('文件上传成功：' . $info->getRealPath());
+                $picList = str_replace('\\', '/', $info->getSaveName());
+            } else {
+                // 上传失败获取错误信息
+                $this->error($logoFile->getError());
             }
-            echo json_encode($picList);
         }
+        echo $picList;
     }
 
     public function savePic(Request $request)
