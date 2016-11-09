@@ -222,9 +222,21 @@ class Index extends Base
 
     public function productPic(Request $request)
     {
-        $info = Db::name('info')->field('pic')->where('id', $request->param('id/d'))->find();
+        $id = $request->param('id/d');
+        $info = Db::name('info')->field('pic')->where('id', $id)->find();
         $this->assign('pic', explode(',', $info['pic']));
+        $this->assign('id', $id);
         return $this->fetch('product-pic');
+    }
+
+    public function savePic(Request $request)
+    {
+        if ($request->isPost()) {
+            $id = $request->post('id/d');
+            $pic = $request->post('pic/s');
+            Db::name('info')->where(['id' => $id])->update(['pic' => $pic, 'update_time' => time()]);
+            return ['status' => 1, 'info' => '保存成功'];
+        }
     }
 
     // 查看产品视频
