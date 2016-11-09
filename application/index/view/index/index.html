@@ -139,7 +139,10 @@
 function productAdd(title,url,w,h){
 	layer_show(title,url,w,h);
 }
-setCookie("Huiskin", 'green');
+// 第一次默认将主题设置为green
+if (!getCookie('Huiskin')) {
+	setCookie("Huiskin", 'green');
+}
 $(function(){
 	// 展开菜单
 	$('#menu-article dt:first-child').trigger('click');
