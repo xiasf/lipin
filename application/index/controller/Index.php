@@ -159,7 +159,6 @@ class Index extends Base
     public function productUpdate(Request $request)
     {
         $id = $request->param('id/d');
-
         if ($request->isPost()) {
             $data                = [];
             $data['name']        = $request->post('name');
@@ -224,7 +223,15 @@ class Index extends Base
     {
         $id = $request->param('id/d');
         $info = Db::name('info')->field('pic')->where('id', $id)->find();
-        $this->assign('pic', explode(',', $info['pic']));
+        if (!$info) {
+            $this->error('信息不存在！');
+        }
+        if (!empty($info['pic'])) {
+            $picList = explode(',', $info['pic']);
+        } else {
+            $picList = [];
+        }
+        $this->assign('pic', $picList);
         $this->assign('id', $id);
         return $this->fetch('product-pic');
     }

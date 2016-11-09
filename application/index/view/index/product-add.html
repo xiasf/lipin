@@ -36,7 +36,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="name" name="name">
+				<input type="text" class="input-text" value="资料库名称" placeholder="" id="name" name="name">
 			</div>
 		</div>
 
@@ -84,7 +84,9 @@
 					<a href="javascript:void();" class="btn btn-primary radius upload-btn"> <i class="Hui-iconfont">&#xe642;</i>
 						浏览文件
 					</a>
-					<input type="file" name="pic[]" multiple class="input-file"></span>
+					<input type="file" name="pic[]" multiple class="input-file">
+					<label for="">按住Ctrl键可多选</label>
+				</span>
 			</div>
 		</div>
 		<div class="row cl">
@@ -99,7 +101,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="content" cols="" rows="" class="textarea"  placeholder="描述..." onKeyUp="textarealength(this,10000)"></textarea>
+				<textarea name="content" cols="" rows="" class="textarea"  placeholder="描述..." onKeyUp="textarealength(this,10000)">资料库描述</textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/10000</p>
 			</div>
 		</div>
