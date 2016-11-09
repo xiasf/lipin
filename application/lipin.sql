@@ -66,15 +66,14 @@ DROP TABLE IF EXISTS `lipin_device`;
 CREATE TABLE `lipin_device` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `imei` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '设备imei',
+  `user_name` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT 'user_name',
   `mobile` char(15) NULL COMMENT 'mobile',
   `status` tinyint(4) DEFAULT '0' COMMENT '状态，0-禁止，1-允许',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   `active_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '活跃时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `imei_mobile` (`imei`,`mobile`) USING BTREE,
   UNIQUE KEY `imei` (`imei`) USING BTREE,
-  UNIQUE KEY `mobile` (`mobile`) USING BTREE,
   KEY `status` (`status`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='设备表';
 
