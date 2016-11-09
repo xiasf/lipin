@@ -63,11 +63,11 @@ class Api extends \think\Controller
             $getToken     = $request->post('token');        //授权码
             $getLatitude  = $request->post('latitude');     //纬度
             $getLongitude = $request->post('longitude');    //经度
-            $getTel = $request->post('tel');    //tel
+            $getTel       = $request->post('tel');    //tel
 
             if ($this->deviceCheck($getImei)) {
                 // 得到满足条件的批次
-                if ($getID && ($info = Db::name('tag')->alias('t')->join('__INFO__ i', 't.pid = i.id')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
+                if (!empty($getID) && ($info = Db::name('tag')->alias('t')->join('__INFO__ i', 't.pid = i.id')->where(['t.tagid' => $getID, 't.status' => 1])->find())) {
                     $arr = [
                         "logo"    => $request->root(true) . '/uploads/' . $info['logo'],
                         "video"   => $request->root(true) . '/uploads/' . $info['video'],
