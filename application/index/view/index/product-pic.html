@@ -84,7 +84,7 @@
             <span class="del" onclick="del(this)">删除</span>
     	</li>
         {/volist}
-        <li id="add-pic"><a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传</a></li>
+        <li id="add-pic"><a href="javascript:upload();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传</a></li>
         <div class="clear"></div>
     </ul>
 <div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -104,6 +104,10 @@
 <script>
     $(function(){
     });
+
+    function upload() {
+        
+    }
 
     function del(t) {
         layer.confirm('确认删除？', {
