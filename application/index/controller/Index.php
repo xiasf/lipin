@@ -206,6 +206,7 @@ class Index extends Base
         }
     }
 
+
     public function productList()
     {
         // $list = UserModel::paginate(3);
@@ -233,6 +234,30 @@ class Index extends Base
         $this->assign('pic', $picList);
         $this->assign('id', $id);
         return $this->fetch('product-pic');
+    }
+
+    public function picUpload(Request $request)
+    {
+        if ($request->isPost()) {
+            // 获取表单上传文件
+            $picList = request()->file('pic');
+            if (!empty($picList)) {
+                foreach ($picList as $file) {
+                    // 移动到框架应用根目录/public/uploads/ 目录下
+                    $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+                    if ($info) {
+                        // 成功上传后 获取上传信息
+                        // echo $info->getSaveName() . '<br />';
+                        $picList[] = str_replace('\\', '/', $info->getSaveName());
+                    } else {
+                        // 上传失败获取错误信息
+                        // echo $file->getError() . '<br />';
+                        $this->error($file->getError());
+                    }
+                }
+            }
+            echo json_encode($picList);
+        }
     }
 
     public function savePic(Request $request)

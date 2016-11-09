@@ -196,7 +196,7 @@ return [
     'session'                => [
         'id'             => '',
         // SESSION_ID的提交变量,解决flash上传跨域
-        'var_session_id' => '',
+        'var_session_id' => 'session_id',
         // SESSION 前缀
         'prefix'         => 'think',
         // 驱动方式 支持redis memcache memcached

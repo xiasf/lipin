@@ -84,7 +84,7 @@
             <span class="del" onclick="del(this)">删除</span>
     	</li>
         {/volist}
-        <li id="add-pic"><a href="javascript:upload();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传</a></li>
+        <li id="add-pic"><a id="uploadify" href="#" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 上传</a></li>
         <div class="clear"></div>
     </ul>
 <div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -100,14 +100,42 @@
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui/js/H-ui.js"></script> 
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui.admin/js/H-ui.admin.js"></script> 
-<script skip="skip" type='text/javascript' src="http://www.itaohz.com/views/sysdefault/javascript/jquery.sortable.js"></script> 
+<script skip="skip" type='text/javascript' src="http://www.itaohz.com/views/sysdefault/javascript/jquery.sortable.js"></script>
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script> 
+<link href="__STATIC__/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
 <script>
     $(function(){
-    });
 
-    function upload() {
-        
-    }
+        $("#uploadify").uploadify({
+            //指定swf文件
+            'swf': '__STATIC__/uploadify/uploadify.swf',
+            //后台处理的页面
+            'uploader': '{:url('picUpload')}',
+            //按钮显示的文字
+            'buttonText': '上传图片',
+            'height': 15,
+            'width': 80,
+            //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
+            //在浏览窗口底部的文件类型下拉菜单中显示的文本
+            'fileTypeDesc': 'Image Files',
+            //允许上传的文件后缀
+            'fileTypeExts': '*.gif; *.jpg; *.png',
+            //发送给后台的其他参数通过formData指定
+            'formData': {session_id: '{:session_id()}'},
+            //上传文件页面中，你想要用来作为文件队列的元素的id, 默认为false  自动生成,  不带#
+            //'queueID': 'fileQueue',
+            //选择文件后自动上传
+            'auto': true,
+            //设置为true将允许多文件上传
+            'multi': true,
+            onUploadSuccess: function (file, data, response) {
+                // console.log(file);
+                console.log(data);
+                // console.log(response);
+            }
+        });
+
+    });
 
     function del(t) {
         layer.confirm('确认删除？', {
