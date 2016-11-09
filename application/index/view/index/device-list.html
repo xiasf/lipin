@@ -40,6 +40,7 @@
 					<th width="70">ID</th>
 					<th width="70">imei</th>
 					<th width="70">手机号码</th>
+					<th width="70">名称</th>
 					<th width="70">添加时间</th>
 					<th width="70">活跃时间</th>
 					<th width="70">状态</th>
@@ -53,6 +54,7 @@
 					<td>{$info.id}</td>
 					<td>{$info.imei}</td>
 					<td>{$info.mobile}</td>
+					<td>{$info.user_name}</td>
 					<td>{$info.create_time|date='Y-m-d H:i:s',###}</td>
 					<td>{$info.active_time|date='Y-m-d H:i:s',###}</td>
 					<td>{if condition="$info.status eq 1"}<span class="badge badge-success">通过</span>{else/}<span class="badge badge-danger">禁止</span>{/if}</td>
