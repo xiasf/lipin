@@ -107,7 +107,7 @@ class Index extends Base
                     if ($info) {
                         // 成功上传后 获取上传信息
                         // echo $info->getSaveName() . '<br />';
-                        $data['pic'][] = str_replace('\\', '/', $info2->getSaveName());
+                        $data['pic'][] = str_replace('\\', '/', $info->getSaveName());
                     } else {
                         // 上传失败获取错误信息
                         // echo $file->getError() . '<br />';
