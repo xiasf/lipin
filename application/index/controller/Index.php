@@ -114,8 +114,8 @@ class Index extends Base
                         $this->error($file->getError());
                     }
                 }
+                $data['pic'] = implode(',', $data['pic']);
             }
-            $data['pic'] = implode(',', $data['pic']);
 
             $logoFile = $request->file('logo');
             if (!empty($logoFile)) {
@@ -213,7 +213,7 @@ class Index extends Base
         // $list = UserModel::paginate(3);
         $list = Db::name('info')->order('id', 'desc')->paginate(50);
         foreach ($list as $key => $value) {
-            $list[$key] = array_merge($list[$key], ['cover' => strstr($list[$key]['pic'], ',', true), 'pic_num' => substr_count($list[$key]['pic'], ',') + 1]);
+            $list[$key] = array_merge($list[$key], ['cover' => (strpos($list[$key]['pic'], ',') !== false ? strstr($list[$key]['pic'], ',', true) : $list[$key]['pic']), 'pic_num' => substr_count($list[$key]['pic'], ',') + 1]);
         }
 
         $this->assign('list', $list);
@@ -372,6 +372,14 @@ class Index extends Base
             }
             $this->assign('info',$device);
             return $this->fetch('device-update');
+        }
+    }
+
+    public function deviceDelete(Request $request)
+    {
+        if ($request->isPost()) {
+            $id = $request->post('id/d');
+            Db::name();
         }
     }
 
