@@ -166,14 +166,13 @@ class Index extends Base
             $data['update_time'] = time();
 
             // 获取表单上传文件
-            $file = $request->file('pic');
-
+            $file = $request->file('logo');
             if ($file) {
                 // 移动到框架应用根目录/public/uploads/ 目录下
                 $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
                 if ($info) {
                     // $this->success('文件上传成功：' . $info->getRealPath());
-                    $data['pic'] = str_replace('\\', '/', $info->getSaveName());
+                    $data['logo'] = str_replace('\\', '/', $info->getSaveName());
                 } else {
                     // 上传失败获取错误信息
                     $this->error($file->getError());
@@ -194,7 +193,7 @@ class Index extends Base
                 }
             }
 
-            $data['create_time'] = time();
+            $data['update_time'] = time();
             $res = Db::name('info')->where('id', $id)->update($data);
             $this->success('更新成功！');
         } else {
@@ -315,6 +314,8 @@ class Index extends Base
                 $this->error('添加失败！');
             }
         } else {
+            $list = Db::name('info')->field('id,name')->order('id', 'desc')->limit(10)->select();
+            $this->assign('list', $list);
             return $this->fetch('tag-add');
         }
     }

@@ -55,6 +55,19 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">资料库ID：</label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<span class="select-box">
+					<select class="select valid" name="type" che="se()">
+						<option value="0" selected="" >手动填写</option>
+						{volist name="list" id="info"}
+						<option value="{$info.id}">{$info.name}</option>
+						{/volist}
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>NFC标签ID：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="tagid" name="tagid">
@@ -81,6 +94,11 @@
 
 <!--请在下方写此页面业务相关的脚本--> 
 <script type="text/javascript">
+
+function se(t) {
+	$('#pid').val($(t).val());
+}
+
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
