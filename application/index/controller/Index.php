@@ -81,6 +81,7 @@ class Index extends Base
             }
             */
 
+            /*
             // 获取表单上传文件
             $file = $request->file('pic');
             if (!empty($file)) {
@@ -95,6 +96,26 @@ class Index extends Base
                     $this->error($file->getError());
                 }
             }
+            */
+
+            // 获取表单上传文件
+            $picList = request()->file('pic');
+            if (!empty($picList)) {
+                foreach ($picList as $file) {
+                    // 移动到框架应用根目录/public/uploads/ 目录下
+                    $info = $file->validate(['ext' => 'jpg,png'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+                    if ($info) {
+                        // 成功上传后 获取上传信息
+                        // echo $info->getSaveName() . '<br />';
+                        $data['pic'][] = str_replace('\\', '/', $info2->getSaveName());
+                    } else {
+                        // 上传失败获取错误信息
+                        // echo $file->getError() . '<br />';
+                        $this->error($file->getError());
+                    }
+                }
+            }
+            $data['pic'] = implode(',', $data['pic']);
 
             $logoFile = $request->file('logo');
             if (!empty($logoFile)) {
@@ -190,10 +211,20 @@ class Index extends Base
     public function productList()
     {
         // $list = UserModel::paginate(3);
-
         $list = Db::name('info')->order('id', 'desc')->paginate(50);
-        $this->assign('list',$list);
+        foreach ($list as $key => $value) {
+            $list[$key] = array_merge($list[$key], ['cover' => strstr($list[$key]['pic'], ',', true), 'pic_num' => substr_count($list[$key]['pic'], ',') + 1]);
+        }
+
+        $this->assign('list', $list);
         return $this->fetch('product-list');
+    }
+
+    public function productPic(Request $request)
+    {
+        $info = Db::name('info')->field('pic')->where('id', $request->param('id/d'))->find();
+        $this->assign('pic', explode(',', $info['pic']));
+        return $this->fetch('product-pic');
     }
 
     // 查看产品视频
@@ -207,6 +238,7 @@ class Index extends Base
         $this->assign('info', $info);
         return $this->fetch('product-video');
     }
+
 
     public function productSend(Request $request)
     {

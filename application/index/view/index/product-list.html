@@ -23,6 +23,31 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 <title>礼品列表</title>
+<style>
+	.cover {
+		position: relative;
+		width: 60px;
+		margin: 0 auto;
+	}
+	.cover span {
+		position: absolute;
+		display: block;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		color: #fff;
+		background-color: rgba(0, 0, 0, 0.69);
+	}
+	.pic-item {
+		max-width: 250px;
+		max-height: 120px;
+		float: left;
+		margin: 10px;
+	}
+</style>
 </head>
 <body>
 <div class="page-container">
@@ -56,7 +81,7 @@
 					<td><input name="id" class="id_checkbox" type="checkbox" value="{$info.id}"></td>
 					<td>{$info.id}</td>
 					<td>{if condition="$info.logo"}<img width="50px" height="50px" src="/uploads/{$info.logo}">{else/}无logo{/if}</td>
-					<td>{if condition="$info.pic"}<img width="50px" height="50px" src="/uploads/{$info.pic}">{else/}无图片{/if}</td>
+					<td>{if condition="$info.cover"}<div class="cover" onclick="productPic('相册','{:url('productPic',['id'=>$info['id']])}','','510')"><img width="50px" height="50px" src="/uploads/{$info.cover}"><span>{$info.pic_num}张</span></div>{else/}无图片{/if}</td>
 					<td>{if condition="$info.video"}<a href="javascript:layer_show('查看视频', '{:url('productVideo',['id'=>$info['id']])}','','510')">查看视频</a>{else/}无视频{/if}</td>
 					<td class="text-l">{$info.name}</td>
 					<td class="text-l">{$info.content}</td>
@@ -86,6 +111,28 @@ function productAdd(title,url,w,h){
 function productUpdate(title,url,w,h){
 	layer_show(title,url,w,h);
 }
+
+function productPic(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+$(function() {
+	// $('.cover').click(function() {
+	// 	return;
+	// 	var pic = $(this).data('pic');
+	// 	var arr = pic.split(',');
+	// 	var str = '';
+	// 	for (var i = 0 ; i < arr.length ; i++) {
+	// 		str += '<img class="pic-item" src=/uploads/' + arr[i] + '>';
+	// 	}
+	// 	layer.open({
+	// 		title :null,
+	// 	  	type: 1,
+	// 	  	area: ['800px', '400px'],
+	// 	  	content: str,
+	// 	});
+	// });
+});
 
 </script>
 </body>

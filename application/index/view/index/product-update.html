@@ -47,30 +47,21 @@
 				<input type="text" name="end" id="" placeholder="输入止" value="" class="input-text" style=" width:25%" disabled>
 			</div>
 		</div> -->
+
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">logo：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
 
-				<input class="input-text upload-url" type="text" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<input class="input-text upload-url" type="text" id="logo" readonly nullmsg="请添加附件！" style="width:200px">
 				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
 				<input type="file" multiple name="logo" class="input-file">
 				</span>
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">图片：</label>
-			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
-
-				<input class="input-text upload-url" type="text" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
-				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
-				<input type="file" multiple name="pic" class="input-file">
-				</span>
-			</div>
-		</div>
-		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">视频：</label>
 			<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
-				<input class="input-text upload-url" type="text" id="uploadfile" readonly nullmsg="请添加视频！" style="width:200px">
+				<input class="input-text upload-url" type="text" id="video" readonly nullmsg="请添加视频！" style="width:200px">
 				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
 				<input type="file" name="video" class="input-file">
 				</span>
@@ -110,10 +101,9 @@ $(function(){
     var formObj = new Form('form-member-add');
     var info = {:json_encode($info)};
     formObj.init(info);
-    $('#uploadfile').val(info.pic);
+    $('#logo').val(info.logo);
+    $('#video').val(info.video);
     // $('input[name=status]').val(info.static);
-
-
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
