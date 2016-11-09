@@ -58,7 +58,7 @@
 					<td>{$info.latitude}</td>
 					<td><a href="https://www.so.com/s?q={$info.request_ip|long2ip}" target="_blank">{$info.request_ip|long2ip}</a></td>
 					<td>{$info.create_time|date='Y-m-d H:i:s',###}</td>
-					<td>{$info.result}</td>
+					<td><span style="color: {$info.color}">{$info.result}</span></td>
 					<td class="f-14 device-brand-manage"><a style="text-decoration:none" onclick="deviceUpdate('编辑','{:url('deviceUpdate',['id'=>$info['id']])}','','510')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>
 				</tr>
 				{/volist}
