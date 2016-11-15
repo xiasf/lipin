@@ -70,8 +70,7 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-3">描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<textarea name="content" cols="" rows="" class="textarea"  placeholder="描述..." onKeyUp="textarealength(this,10000)"></textarea>
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/10000</p>
+				<textarea id="content" name="content" cols="" rows="" class="textarea"  placeholder="描述..."></textarea>
 			</div>
 		</div>
 		<div class="row cl">
@@ -90,7 +89,13 @@
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery.validation/1.14.0/messages_zh.min.js"></script> 
 <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui/js/H-ui.js"></script> 
-<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui.admin/js/H-ui.admin.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/editor_wy/css/wysiwyg-editor.css" />
+   <script type="text/javascript"  src="__H-UI-ADMIN-V2.5__/lib/editor_wy/wysiwyg.js"></script>   
+    <script type="text/javascript"  src="__H-UI-ADMIN-V2.5__/lib/editor_wy/wysiwyg-editor.js"> </script>
+
+
 <script src="__STATIC__/js/form.js"></script>
 <!--/_footer /作为公共模版分离出去--> 
 
@@ -109,6 +114,183 @@ $(function(){
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
 	});
+	
+	 $("#content").wysiwyg({
+		 classes: 'some-more-classes',
+            // 'selection'|'top'|'top-selection'|'bottom'|'bottom-selection'
+         toolbar: 'top-selection',
+                // Fontsize plugin
+         buttons: {
+			  			 fontsize: {
+                    title: 'Size',
+                    image: '大小', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    popup: function( $popup, $button ) {
+                            var list_fontsizes = {
+                                // Name : Size
+                                'Huge'    : 7,
+                                'Larger'  : 6,
+                                'Large'   : 5,
+                                'Normal'  : 4,
+                                'Small'   : 3,
+                                'Smaller' : 2,
+                                'Tiny'    : 1
+                            };
+                            var $list = $('<div/>').addClass('wysiwyg-toolbar-list')
+                                                   .attr('unselectable','on');
+                            $.each( list_fontsizes, function( name, size ){
+                                var $link = $('<a/>').attr('href','#')
+                                                    .css( 'font-size', (8 + (size * 3)) + 'px' )
+                                                    .html( name )
+                                                    .click(function(event){
+                                                        $("#content").wysiwyg('shell').fontSize(size).closePopup();
+                                                        // prevent link-href-#
+                                                        event.stopPropagation();
+                                                        event.preventDefault();
+                                                        return false;
+                                                    });
+                                $list.append( $link );
+                            });
+                            $popup.append( $list );
+                           }
+                    //showstatic: true,    // wanted on the toolbar
+                    //showselection: true    // wanted on selection
+                },
+                // Header plugin
+                header: {
+                    title: 'Header',
+                    image: '头', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    popup: function( $popup, $button ) {
+                            var list_headers = {
+                                    // Name : Font
+                                    'Header 1'     : '<h1>',
+                                    'Header 2'     : '<h2>',
+                                    'Header 3'     : '<h3>',
+                                    'Header 4'     : '<h4>',
+                                    'Header 5'     : '<h5>',
+                                    'Header 6'     : '<h6>',
+                                    'Preformatted' : '<pre>'
+                                };
+                            var $list = $('<div/>').addClass('wysiwyg-toolbar-list')
+                                                   .attr('unselectable','on');
+                            $.each( list_headers, function( name, format ){
+                                var $link = $('<a/>').attr('href','#')
+                                                     .css( 'font-family', format )
+                                                     .html( name )
+                                                     .click(function(event){
+                                                        $("#content").wysiwyg('shell').format(format).closePopup();
+                                                        // prevent link-href-#
+                                                        event.stopPropagation();
+                                                        event.preventDefault();
+                                                        return false;
+                                                    });
+                                $list.append( $link );
+                            });
+                            $popup.append( $list );
+                           }
+
+                },
+               bold: {
+                    title: 'Bold (Ctrl+B)',
+                    image: '粗体', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'b'
+                },
+                italic: {
+                    title: 'Italic (Ctrl+I)',
+                    image: '斜体', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'i'
+                },
+                underline: {
+                    title: 'Underline (Ctrl+U)',
+                    image: '下划线', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'u'
+                },
+                strikethrough: {
+                    title: 'Strikethrough (Ctrl+S)',
+                    image: '横画', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 's'
+                },
+                forecolor: {
+                    title: 'Text color',
+                    image: '颜色' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                },
+                highlight: {
+                    title: 'Background color',
+                    image: '背景颜色' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                },
+                alignleft:  {
+                    title: 'Left',
+                    image: '靠左', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                aligncenter:  {
+                    title: 'Center',
+                    image: '居中', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                alignright:  {
+                    title: 'Right',
+                    image: '靠右', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                alignjustify:  {
+                    title: 'Justify',
+                    image: '整理', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                subscript: {
+                    title: 'Subscript',
+                    image: '下标', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: true    // wanted on selection
+                },
+                superscript: {
+                    title: 'Superscript',
+                    image: '上标', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: true    // wanted on selection
+                },
+                indent:  {
+                    title: 'Indent',
+                    image: '缩进', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                outdent:  {
+                    title: 'Outdent',
+                    image: '缩出', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                orderedList:  {
+                    title: 'Ordered list',
+                    image: '有序', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                unorderedList: {
+                    title: 'Unordered list',
+                    image: '无序', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                removeformat: {
+                    title: 'Remove format',
+                    image: '清除' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                }
+            }
+		 
+		 
+		 
+		 
+		 
+	 })
+
+	
+	
 });
 </script> 
 <!--/请在上方写此页面业务相关的脚本-->
