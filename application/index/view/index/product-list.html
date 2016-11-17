@@ -84,7 +84,7 @@
 					<td><div class="cover" onclick="productPic('相册','{:url('productPic',['id'=>$info['id']])}','','510')">{if condition="$info.cover"}<img width="50px" height="50px" src="/uploads/{$info.cover}"><span>{$info.pic_num}张</span>{else/}<a href="#">无图片</a>{/if}</div></td>
 					<td>{if condition="$info.video"}<a href="javascript:layer_show('查看视频', '{:url('productVideo',['id'=>$info['id']])}','','510')">查看视频</a>{else/}无视频{/if}</td>
 					<td class="text-l">{$info.content}</td>
-					<td class="f-14 product-brand-manage"><a style="text-decoration:none" onclick="productUpdate('编辑','{:url('productUpdate',['id'=>$info['id']])}','','510')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>
+					<td class="f-14 product-brand-manage"><a style="text-decoration:none" onclick="productUpdate('编辑','{:url('productUpdate',['id'=>$info['id']])}','910','')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>
 				</tr>
 				{/volist}
 			</tbody>

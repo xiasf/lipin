@@ -47,7 +47,13 @@ class Index extends Base
             return $this->fetch('test');
         }
     }
-
+	public function mapBaidu(Request $request){
+		$data = [];
+		$data["longitude"] = $request->param('longitude');
+		$data["latitude"] = $request->param('latitude');
+		$this->assign('data',$data);
+		return $this->fetch("map-baidu");
+	}
     public function index()
     {
         return $this->fetch();

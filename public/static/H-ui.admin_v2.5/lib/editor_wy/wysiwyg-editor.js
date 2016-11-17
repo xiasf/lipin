@@ -688,3 +688,112 @@
         return this;
     };
 })(window, document, jQuery);
+
+$(function(){
+	window.editor = function(elem){
+		$(elem).wysiwyg({
+		 classes: 'some-more-classes',
+            // 'selection'|'top'|'top-selection'|'bottom'|'bottom-selection'
+         toolbar: 'top-selection',
+                // Fontsize plugin
+         buttons: {
+			
+			bold: {
+                    title: 'Bold (Ctrl+B)',
+                    image: '&#xe6e7;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'b'
+                },
+                italic: {
+                    title: 'Italic (Ctrl+I)',
+                    image: '&#xe6e9;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'i'
+                },
+                underline: {
+                    title: 'Underline (Ctrl+U)',
+                    image: '&#xe6fe;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 'u'
+                },
+                strikethrough: {
+                    title: 'Strikethrough (Ctrl+S)',
+                    image: '横画', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    hotkey: 's'
+                },
+                forecolor: {
+                    title: 'Text color',
+                    image: '颜色' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                },
+                highlight: {
+                    title: 'Background color',
+                    image: '背景颜色' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                },
+                alignleft:  {
+                    title: 'Left',
+                    image: '&#xe710;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                aligncenter:  {
+                    title: 'Center',
+                    image: '&#xe70e;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                alignright:  {
+                    title: 'Right',
+                    image: '&#xe711;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                alignjustify:  {
+                    title: 'Justify',
+                    image: '&#xe70f;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                subscript: {
+                    title: 'Subscript',
+                    image: '下标', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: true    // wanted on selection
+                },
+                superscript: {
+                    title: 'Superscript',
+                    image: '上标', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: true    // wanted on selection
+                },
+                indent:  {
+                    title: 'Indent',
+                    image: '缩进', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                outdent:  {
+                    title: 'Outdent',
+                    image: '缩出', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                orderedList:  {
+                    title: 'Ordered list',
+                    image: '&#xe6f3;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                unorderedList: {
+                    title: 'Unordered list',
+                    image: '&#xe6f5;', // <img src="path/to/image.png" width="16" height="16" alt="" />
+                    //showstatic: true,    // wanted on the toolbar
+                    showselection: false    // wanted on selection
+                },
+                removeformat: {
+                    title: 'Remove format',
+                    image: '清除' // <img src="path/to/image.png" width="16" height="16" alt="" />
+                } 
+		 }
+
+		 
+	 })
+	};
+	
+})

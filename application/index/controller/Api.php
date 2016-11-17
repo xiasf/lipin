@@ -74,22 +74,22 @@ class Api extends \think\Controller
                         "pic"     => array_map(function($map) use($request) {return $request->root(true) . '/uploads/' . $map;}, explode(',' ,$info['pic'])),
                         "content" => $info['content']
                     ];
-                    $arr['result'] = 'PASS(通过）';
+                    $arr['result'] = 'PASS（通过）';
                     $arr['color']  = '#1290CF';
                 } else {
                     $arr['result']  = 'Failed to pass（不通过）';
                     $arr['color']   = '#C10000';
                     $arr['logo']    = 'http://lipin.uogo8.com/no/logo.png';
                     $arr['pic']     = ['http://lipin.uogo8.com/no/label.jpg'];
-                    $arr['content'] = '该物品未经验证！';
+                    $arr['content'] = '非常抱歉，该物品暂时找不到验证信息。可能是伪品，请与官方联系！';
                     $arr['video']   = '';
                 }
             } else {
-                $arr['result']  = '手机非官方指定';
+                $arr['result']  = '手机未解锁';
                 $arr['color']   = '#C10000';
                 $arr['logo']    = 'http://lipin.uogo8.com/no/logo.png';
                 $arr['pic']     = ['http://lipin.uogo8.com/no/phone.jpg'];
-                $arr['content'] = '手机非官方指定，请与官方取得联系授权';
+                $arr['content'] = '该手机未经授权，请与官方取得联系授权解锁后方可使用';
                 $arr['video']   = '';
             }
 
