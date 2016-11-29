@@ -54,6 +54,7 @@ class Index extends Base
 		$this->assign('data',$data);
 		return $this->fetch("map-baidu");
 	}
+
     public function index()
     {
         return $this->fetch();
@@ -411,7 +412,11 @@ class Index extends Base
         $this->assign('list',$list);
         return $this->fetch('device-list');
     }
-
+	public function deviceMaps(){
+        $list = Db::name('device')->order('id', 'desc')->paginate(50);
+        $this->assign('list',$list);
+		return $this->fetch("device-maps");
+	}
     public function deviceUpdate(Request $request)
     {
         $id = $request->param('id/d');

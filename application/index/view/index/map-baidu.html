@@ -1,43 +1,43 @@
 <!--_meta 作为公共模版分离出去-->
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<LINK rel="Bookmark" href="/favicon.ico" >
-<LINK rel="Shortcut Icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
+    <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
+    <!--[if lt IE 9]>
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 <script type="text/javascript" src="lib/PIE_IE678.js"></script>
 <![endif]-->
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/Hui-iconfont/1.0.7/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/icheck/icheck.css" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/style.css" />
-<!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/Hui-iconfont/1.0.7/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/icheck/icheck.css" />
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-<!--/meta 作为公共模版分离出去-->
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PmwGRhbjcwxG6XI6SvTPYF0bVu56NZm1"></script>
-<title>test</title>
-   <style type="text/css">
-        body, html,#baiduMap {width: 100%;height: 100%;overflow: hidden;margin:0;}
-		#mapLoading{padding-top:30%;font-size: 36px;background-color:rgba(43,43,43,0.35);color:#22FF00;text-align: center;position: absolute;z-index: 2;display: block;width: 100%;height:100%;}
-    </style>
-</head>
-<body>
+    <!--/meta 作为公共模版分离出去-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PmwGRhbjcwxG6XI6SvTPYF0bVu56NZm1"></script>
+    <title>test</title>
+    <style type="text/css">
+body, html, #baiduMap { width: 100%; height: 100%; overflow: hidden; margin: 0; }
+#mapLoading { padding-top: 30%; font-size: 36px; background-color: rgba(43,43,43,0.35); color: #22FF00; text-align: center; position: absolute; z-index: 2; display: block; width: 100%; height: 100%; }
+</style>
+    </head>
+    <body>
 <div id="mapLoading">正在解析定位...</div>
 <div id="baiduMap">map loading...</div>
 </body>
 </html>
-<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 
@@ -51,13 +51,15 @@
     //地图初始化
     var bm = new BMap.Map("baiduMap");
     bm.centerAndZoom(ggPoint, 16);
-    bm.addControl(new BMap.NavigationControl());
 
-    //添加gps marker和label
-/*    var markergg = new BMap.Marker(ggPoint);
-    bm.addOverlay(markergg); //添加GPS marker
-    var labelgg = new BMap.Label("未转换的GPS坐标（错误）",{offset:new BMap.Size(20,-10)});
-    markergg.setLabel(labelgg); //添加GPS label*/
+bm.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+	bm.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+	bm.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+	bm.enableScrollWheelZoom();                            //启用滚轮放大缩小
+	bm.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+	stCtrl.setOffset(new BMap.Size(20, 20));
+	bm.addControl(stCtrl);//添加全景控件
 var geoc = new BMap.Geocoder(),addressInfo="";
     //坐标转换完之后的回调函数
     translateCallback = function (data){

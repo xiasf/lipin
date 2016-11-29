@@ -1,0 +1,100 @@
+﻿<!DOCTYPE HTML>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<script type="text/javascript" src="lib/PIE_IE678.js"></script>
+<![endif]-->
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/echarts/2.2.7/doc/asset/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui/css/H-ui.min.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/H-ui.admin.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/Hui-iconfont/1.0.7/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/icheck/icheck.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/style.css" />
+  <!--[if IE 6]>
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+  <style type="text/css">
+html, body { margin: 0; width: 100%; height: 100%; background: #ffffff; }
+#allmap { width: 100%; height: 780px;display: block; }
+#panel { position: absolute; top: 30px; left: 10px; z-index: 999; color: #fff; }
+#login { position: absolute; width: 300px; height: 40px; left: 50%; top: 50%; margin: -40px 0 0 -150px; }
+#login input[type=password] { width: 200px; height: 30px; padding: 3px; line-height: 30px; border: 1px solid #000; }
+#login input[type=submit] { width: 80px; height: 38px; display: inline-block; line-height: 38px; }
+</style>
+  <title>设备位置</title>
+  </head>
+  <body>
+<div class="page-container">
+    <div id="allmap">地图载入中 </div>
+  </div>
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/laypage/1.2/laypage.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=PmwGRhbjcwxG6XI6SvTPYF0bVu56NZm1"></script>
+<script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/data/points-sample-data.js"></script>
+<script type="text/javascript">
+
+function deviceAdd(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+function deviceUpdate(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+function deviceDelete(id){
+	layer.confirm('确认删除？', {
+            btn: ['删除','取消'] //按钮
+        }, function(){
+        	$.post('{:url('deviceDelete')}', {id:id}, function(res) {
+			    if (res.status == 1) {
+			        layer.msg('删除成功！', {icon: 1});
+			        window.location.reload();
+			    } else {
+			        layer.msg('删除失败！', {icon: 1});
+			    }
+			}, 'json');
+        }, function(){
+    });
+}
+$(function(){
+var map = new BMap.Map("allmap", {});                        // 创建Map实例
+    map.centerAndZoom(new BMap.Point(105.000, 38.000), 6);     // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom();                        //启用滚轮放大缩小
+    if (document.createElement('canvas').getContext) {  // 判断当前浏览器是否支持绘制海量点
+        var points = [];  // 添加海量点数据
+        for (var i = 0; i < data.data.length; i++) {
+          points.push(new BMap.Point(data.data[i][0], data.data[i][1]));
+        }
+        var options = {
+            size: BMAP_POINT_SIZE_SMALL,
+            shape: BMAP_POINT_SHAPE_STAR,
+            color: '#d340c3'
+        }
+        var pointCollection = new BMap.PointCollection(points, options);  // 初始化PointCollection
+        pointCollection.addEventListener('click', function (e) {
+          alert('单击点的坐标为：' + e.point.lng + ',' + e.point.lat);  // 监听点击事件
+        });
+        map.addOverlay(pointCollection);  // 添加Overlay
+    } else {
+        alert('请在chrome、safari、IE8+以上浏览器查看本示例');
+    }
+	
+})
+
+</script>
+</body>
+</html>
