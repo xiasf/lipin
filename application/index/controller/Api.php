@@ -7,6 +7,11 @@ use think\Request;
 class Api extends \think\Controller
 {
 
+    public function gps()
+    {
+        echo time();
+    }
+
     public function recordGetdata(Request $request)
     {
         $imei = $request->get('imei/s');
