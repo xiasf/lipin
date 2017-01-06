@@ -9,7 +9,7 @@ class Api extends \think\Controller
 
     public function addGps(Request $request)
     {
-        $str = urldecode(input('get.str/s'));trace('log',$str);
+        $str = urldecode($_GET['str']);trace('log',$str);
         if (!preg_match('/\$GPSLOC,\-?(\d+\.\d+),\-?(\d+\.\d+)/is', $str, $matches)) return;
         Db::name('gps_log')->insert([
             'imei'        => '',
