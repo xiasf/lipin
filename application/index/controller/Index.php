@@ -389,6 +389,18 @@ class Index extends Base
         }
     }
 
+    public function gps()
+    {
+        $list = Db::name('gps_log')->where(['longitude' =>['neq', '0.0000']])->order('id', 'desc')->paginate(10);
+        $pointList = [];
+        foreach ($list as $key => $value) {
+            $pointList[] = [$value['longitude'], $value['latitude']];
+        }
+        $this->assign('list', $list);
+        $this->assign('pointList', json_encode($pointList));
+        return $this->fetch();
+    }
+
 
     public function deviceAdd(Request $request)
     {

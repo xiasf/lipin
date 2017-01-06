@@ -53,7 +53,7 @@
 					<td>{$info.tagid}</td>
 					<td>{$info.imei}</td>
 					<td>{$info.mobile}</td>
-					<td>{$info.longitude} - {$info.latitude}&nbsp;&nbsp;[<a style="text-decoration:none" onclick="showbaiduMap('查看地图','{:url('mapBaidu',['longitude'=>$info['longitude'],'latitude'=>$info['latitude']])}','950','710')" href="javascript:;" title="查看地图"><i class="Hui-iconfont">&#xe6c9;</i></a>]</td>
+					<td>{$info.latitude},{$info.longitude} &nbsp;&nbsp;[<a style="text-decoration:none" onclick="showbaiduMap('查看地图','{:url('mapBaidu',['longitude'=>$info['longitude'],'latitude'=>$info['latitude']])}','950','710')" href="javascript:;" title="查看地图"><i class="Hui-iconfont">&#xe6c9;</i></a>]</td>
 					<td><a href="https://www.so.com/s?q={$info.request_ip|long2ip}" target="_blank">{$info.request_ip|long2ip}</a></td>
 					<td>{$info.create_time|date='Y-m-d H:i:s',###}</td>
 					<td><span style="color: {$info.color}">{$info.result}</span></td>

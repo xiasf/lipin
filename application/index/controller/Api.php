@@ -7,14 +7,22 @@ use think\Request;
 class Api extends \think\Controller
 {
 
+    // 从 NMEA 转换为 WGS84 格式
+    public function nmea_ndeg2degree($val='')
+    {
+        $deg = (int) ($val / 100);
+        $val = $deg + ($val - $deg * 100) / 60;
+        return $val;
+    }
+
     public function addGps(Request $request)
     {
         $str = urldecode($request->param('str/s'));
-        if (!preg_match('/\$GPSLOC,\-?(\d+\.\d+),\-?(\d+\.\d+)/is', $str, $matches)) return;
+        if (!preg_match('/\$GPSLOC,(\d+\.\d+),(\d+\.\d+)/is', $str, $matches)) return;
         Db::name('gps_log')->insert([
             'imei'        => '',
-            'latitude'    => $matches[1],
-            'longitude'   => $matches[2],
+            'latitude'    => $this->nmea_ndeg2degree($matches[1]),
+            'longitude'   => $this->nmea_ndeg2degree($matches[2]),
             'str'         => $str,
             'request_ip'  => $request->ip(true),
             'create_time' => time()

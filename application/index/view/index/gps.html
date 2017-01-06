@@ -1,0 +1,155 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="lib/html5.js"></script>
+  <script type="text/javascript" src="lib/respond.min.js"></script>
+  <script type="text/javascript" src="lib/PIE_IE678.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/echarts/2.2.7/doc/asset/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui/css/H-ui.min.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/H-ui.admin.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/Hui-iconfont/1.0.7/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/lib/icheck/icheck.css" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+  <link rel="stylesheet" type="text/css" href="__H-UI-ADMIN-V2.5__/static/h-ui.admin/css/style.css" />
+  <!--[if IE 6]>
+  <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+  <script>DD_belatedPNG.fix('*');</script>
+  <![endif]-->
+  <style type="text/css">
+html, body { margin: 0; width: 100%; height: 100%; background: #ffffff; }
+#allmap { width: 100%; height: 780px;display: block; }
+#panel { position: absolute; top: 30px; left: 10px; z-index: 999; color: #fff; }
+#login { position: absolute; width: 300px; height: 40px; left: 50%; top: 50%; margin: -40px 0 0 -150px; }
+#login input[type=password] { width: 200px; height: 30px; padding: 3px; line-height: 30px; border: 1px solid #000; }
+#login input[type=submit] { width: 80px; height: 38px; display: inline-block; line-height: 38px; }
+</style>
+  <title>设备位置</title>
+</head>
+<body>
+  <div class="page-container">
+    <div id="allmap">地图载入中</div>
+  </div>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/layer/2.1/layer.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/laypage/1.2/laypage.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui/js/H-ui.js"></script>
+  <script type="text/javascript" src="__H-UI-ADMIN-V2.5__/static/h-ui.admin/js/H-ui.admin.js"></script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9Go7FByT2xPEH5VcPKMiZWoY"></script>
+  <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/data/points-sample-data.js"></script>
+  <script type="text/javascript">
+
+pointList = {$pointList};
+$('#allmap').css('height', $(window).height() - 40);
+
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  var point = new BMap.Point(pointList[0][0], pointList[0][1]);
+  map.centerAndZoom(point, 15);
+  map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+  map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+  map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+  map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+  map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+  stCtrl.setOffset(new BMap.Size(20, 20));
+  map.addControl(stCtrl);//添加全景控件
+    map.enableScrollWheelZoom();                        //启用滚轮放大缩小
+  var markerList = [];
+  var polylineList = [];
+  var geoc = new BMap.Geocoder(),addressInfo="";
+var convertor = new BMap.Convertor();
+
+  // 编写自定义函数,创建标注
+  function addMarker(point, i){
+        var pointArr = [];
+        pointArr.push(point);
+        convertor.translate(pointArr, 1, 5, function (data) {
+          if(data.status === 0) {
+          var point = data.points[0];
+
+          polylineList.push(point);
+
+          var marker = new BMap.Marker(point);
+          markerList.push(marker);
+          map.addOverlay(marker);
+
+
+          if (i == 0) {
+              map.panTo(markerList[i].getPosition());
+              markerList[i].setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+          }
+
+
+        // 哈哈异步划线
+        if (i > 0) {
+//           var a = polylineList[i-1];
+//           var b = polylineList[i];
+//           var op = 1;
+// // console.log(point);
+//          var polyline = new BMap.Polyline([a, b], {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
+//             map.addOverlay(polyline);   //增加折线
+// console.log(i);
+
+
+        }
+
+
+          geoc.getLocation(point, function(rs){
+            var addComp = rs.addressComponents;
+            addressInfo = '['+(i+1)+'] ' + addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            var label = new BMap.Label(addressInfo,{offset:new BMap.Size(20+Math.random()*10,-10+Math.random()*100)});
+            marker.setLabel(label); //添加百度label
+            // map.setCenter(point);
+          });
+
+
+          if (i == pointList.length - 1) {
+            // var op =1;
+            // // 异步完毕
+            // var polyline = new BMap.Polyline(polylineList, {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
+            // map.addOverlay(polyline);
+            // 
+
+
+              for (var x = 0,length = polylineList.length; x < length - 1; x ++) {
+                var a = polylineList[x];
+                var b = polylineList[x+1];
+                var op = 1 - (x/length);
+
+               var polyline = new BMap.Polyline([a, b], {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
+                  map.addOverlay(polyline);   //增加折线
+              }
+          }
+
+        }
+      });
+  }
+
+  // go~
+  for (var _i = 0,length = pointList.length; _i < length; _i ++) {
+      var point = new BMap.Point(pointList[_i][0], pointList[_i][1]);
+      addMarker(point, _i);
+  }
+
+// 异步编程，所有同步代码就没意义了
+// for (var i = 0,length = polylineList.length; i < length - 1; i ++) {
+//   var a = polylineList[i];
+//   var b = polylineList[i+1];
+//   var op = 1 - (i/length);
+
+//  var polyline = new BMap.Polyline([a, b], {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
+//     map.addOverlay(polyline);   //增加折线
+// }
+
+
+</script></body>
+</html>
