@@ -7,6 +7,20 @@ use think\Request;
 class Api extends \think\Controller
 {
 
+    public function addGps(Request $request)
+    {
+        $str = urldecode($request->param('str/s'));
+        if (!preg_match('/\$GPSLOC,\-?(\d+\.\d+),\-?(\d+\.\d+)/is', $str, $matches)) return;
+        Db::name('gps_log')->insert([
+            'imei'        => '',
+            'latitude'    => $matches[1],
+            'longitude'   => $matches[2],
+            'str'         => $str,
+            'request_ip'  => $request->ip(true),
+            'create_time' => time()
+        ]);
+    }
+
     public function gps()
     {
         echo time();

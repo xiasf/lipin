@@ -83,7 +83,7 @@ CREATE TABLE `lipin_device` (
 
 
 -- ----------------------------
--- Table structure for `lipin_device`
+-- Table structure for `lipin_validation_log`
 -- ----------------------------
 DROP TABLE IF EXISTS `lipin_validation_log`;
 CREATE TABLE `lipin_validation_log` (
@@ -94,7 +94,7 @@ CREATE TABLE `lipin_validation_log` (
   `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '经度',
   `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '纬度',
   `request_ip` bigint(20) NULL DEFAULT '0' COMMENT '请求IP',
-  `color` varchar(20) NULL DEFAULT '0' COMMENT '请求IP',
+  `color` varchar(20) NULL DEFAULT '0' COMMENT 'color',
   `result` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT 'result',
   `create_time` int(10) unsigned NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NULL DEFAULT '0' COMMENT '更新时间',
@@ -103,6 +103,25 @@ CREATE TABLE `lipin_validation_log` (
 
 -- ----------------------------
 -- Records of lipin_validation_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `lipin_gps_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `lipin_gps_log`;
+CREATE TABLE `lipin_gps_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `imei` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '设备imei',
+  `longitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '经度',
+  `latitude` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '纬度',
+  `request_ip` bigint(20) NULL DEFAULT '0' COMMENT '请求IP',
+  `str` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT 'str',
+  `create_time` int(10) unsigned NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='gps日志表';
+
+-- ----------------------------
+-- Records of lipin_gps_log
 -- ----------------------------
 
 -- ----------------------------
