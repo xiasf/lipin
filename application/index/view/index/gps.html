@@ -118,7 +118,7 @@ var convertor = new BMap.Convertor();
           geoc.getLocation(point, function(rs){
             var addComp = rs.addressComponents;
             addressInfo = '['+(i+1)+'] ' + addComp.province + addComp.city + addComp.district + addComp.street;
-            var label = new BMap.Label(addressInfo,{offset:new BMap.Size(-80+Math.random()*10,-50+Math.random()*10)});
+            var label = new BMap.Label(addressInfo,{offset:new BMap.Size(-80+Math.random()*10, $(window).height() / 4 - 10)});
             marker.setLabel(label); //添加百度label
             // map.setCenter(point);
           });
