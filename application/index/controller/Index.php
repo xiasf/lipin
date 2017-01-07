@@ -391,7 +391,7 @@ class Index extends Base
 
     public function gps()
     {
-        $list = Db::name('gps_log')->where(['longitude' =>['neq', '0.0000']])->order('id', 'desc')->paginate(10);
+        $list = Db::name('gps_log')->where(['longitude' =>['neq', '0.0000']])->order('id', 'desc')->paginate(1);
         $pointList = [];
         foreach ($list as $key => $value) {
             $pointList[] = [$value['longitude'], $value['latitude']];
