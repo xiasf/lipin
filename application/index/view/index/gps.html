@@ -80,6 +80,12 @@ var convertor = new BMap.Convertor();
         pointArr.push(point);
         convertor.translate(pointArr, 1, 5, function (data) {
           if(data.status === 0) {
+
+        markerList.map(function(elem, index) {
+            map.removeOverlay(elem);
+            markerList.shift();
+        });
+
           var point = data.points[0];
 
           polylineList.push(point);
