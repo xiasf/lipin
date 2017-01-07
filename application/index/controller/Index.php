@@ -389,14 +389,17 @@ class Index extends Base
         }
     }
 
-    public function gps()
+    public function gps(Request $request)
     {
         $list = Db::name('gps_log')->where(['longitude' =>['neq', '0.0000']])->order('id', 'desc')->paginate(1);
         $pointList = [];
         foreach ($list as $key => $value) {
             $pointList[] = [$value['longitude'], $value['latitude']];
         }
-        $this->assign('list', $list);
+        // $this->assign('list', $list);
+        if ($request->isAjax()) {
+            return json(['status' => 1, 'msg' => 'ok', 'data' => $pointList]);
+        }
         $this->assign('pointList', json_encode($pointList));
         return $this->fetch();
     }

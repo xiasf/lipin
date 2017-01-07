@@ -54,15 +54,14 @@ $('#allmap').css('height', $(window).height() - 40);
   var map = new BMap.Map("allmap");
   var point = new BMap.Point(pointList[0][0], pointList[0][1]);
   map.centerAndZoom(point, 15);
-  map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
-  map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
-  map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+  // map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+  // map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+  // map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
   map.enableScrollWheelZoom();                            //启用滚轮放大缩小
-  map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
-var stCtrl = new BMap.PanoramaControl(); //构造全景控件
-  stCtrl.setOffset(new BMap.Size(20, 20));
-  map.addControl(stCtrl);//添加全景控件
-    map.enableScrollWheelZoom();                        //启用滚轮放大缩小
+  // map.addControl(new BMap.MapTypeControl());          //添加地图类型控件
+// var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+  // stCtrl.setOffset(new BMap.Size(20, 20));
+  // map.addControl(stCtrl);//添加全景控件
   var markerList = [];
   var polylineList = [];
   var geoc = new BMap.Geocoder(),addressInfo="";
@@ -70,6 +69,13 @@ var convertor = new BMap.Convertor();
 
   // 编写自定义函数,创建标注
   function addMarker(point, i){
+
+        // map.removeOverlay(markerList.shift());
+        markerList.map(function(elem, index) {
+            map.removeOverlay(elem);
+            markerList.shift();
+        });
+
         var pointArr = [];
         pointArr.push(point);
         convertor.translate(pointArr, 1, 5, function (data) {
@@ -91,13 +97,13 @@ var convertor = new BMap.Convertor();
 
         // 哈哈异步划线
         if (i > 0) {
-//           var a = polylineList[i-1];
-//           var b = polylineList[i];
-//           var op = 1;
-// // console.log(point);
-//          var polyline = new BMap.Polyline([a, b], {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
-//             map.addOverlay(polyline);   //增加折线
-// console.log(i);
+            //           var a = polylineList[i-1];
+            //           var b = polylineList[i];
+            //           var op = 1;
+            // // console.log(point);
+            //          var polyline = new BMap.Polyline([a, b], {strokeColor:"green", strokeWeight:10*op, strokeOpacity:0.8*op});   //创建折线
+            //             map.addOverlay(polyline);   //增加折线
+            // console.log(i);
 
 
         }
@@ -105,8 +111,8 @@ var convertor = new BMap.Convertor();
 
           geoc.getLocation(point, function(rs){
             var addComp = rs.addressComponents;
-            addressInfo = '['+(i+1)+'] ' + addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
-            var label = new BMap.Label(addressInfo,{offset:new BMap.Size(20+Math.random()*10,-10+Math.random()*100)});
+            addressInfo = '['+(i+1)+'] ' + addComp.province + addComp.city + addComp.district + addComp.street;
+            var label = new BMap.Label(addressInfo,{offset:new BMap.Size(20+Math.random()*10,-10+Math.random()*10)});
             marker.setLabel(label); //添加百度label
             // map.setCenter(point);
           });
@@ -135,10 +141,19 @@ var convertor = new BMap.Convertor();
   }
 
   // go~
-  for (var _i = 0,length = pointList.length; _i < length; _i ++) {
-      var point = new BMap.Point(pointList[_i][0], pointList[_i][1]);
-      addMarker(point, _i);
+  function go(pointList) {
+    for (var _i = 0,length = pointList.length; _i < length; _i ++) {
+          var point = new BMap.Point(pointList[_i][0], pointList[_i][1]);
+          addMarker(point, _i);
+      }
   }
+  go(pointList);
+
+  setInterval(function () {
+      $.get('{:url("gps")}','',function (res) {
+          go(res.data);
+      }, 'json');
+  }, 3000);
 
 // 异步编程，所有同步代码就没意义了
 // for (var i = 0,length = polylineList.length; i < length - 1; i ++) {
